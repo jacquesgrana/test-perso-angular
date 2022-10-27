@@ -1,1 +1,9 @@
-<p>header works!</p>
+<mat-toolbar class="body-container">
+  <mat-toolbar-row class="flex-center div-title">
+    <h1 class="">{{title}}</h1>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="userService.isAuthenticated" >
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>

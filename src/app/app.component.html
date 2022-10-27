@@ -1,6 +1,7 @@
-<div class="container-fluid">
-  <app-header></app-header>
-  <h2 class="text-center pt-4 pb-4">{{title}}</h2>
-  <router-outlet></router-outlet>
+<div class="container-fluid body-container">
+  <app-header [title]="title"></app-header>
+  <div id="div-container">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer></app-footer>
 </div>

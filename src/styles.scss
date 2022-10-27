@@ -1,0 +1,16 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "library";
+@import "theme";
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body, app-root {
+  height: 100%;
+ }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $components-background-color-bis;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

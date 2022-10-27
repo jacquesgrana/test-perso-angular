@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.pseudo = this.form.controls['pseudo'].value;
+    this.password = this.form.controls['password'].value;
+
     //console.log('login : pseudo : ' + this.pseudo + ' / password : ' + this.password);
     const token = this.userService.login(this.pseudo, this.password);
 /*

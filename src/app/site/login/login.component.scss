@@ -1,0 +1,30 @@
+@import "src/library";
+@import "src/theme";
+
+.body-container {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  flex-grow: 1;
+}
+
+.rounded-block {
+  max-width: 800px;
+  min-width: 400px;
+  min-height: 200px;
+  max-height: 400px;;
+  background-color: $components-background-light-color;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.block-element {
+  color: $components-foreground-color;
+  margin-top: 3rem;
+
+}
+
+.rounded-input {
+  color: $components-foreground-color;
+  border-radius: 5px;
+}
+

@@ -17,7 +17,7 @@ export class UserService {
 
 
   userList : any[] = [];
-  user!: User;
+  user: User = new User(-9999.9, 'nothing', 'nothing', "user");
   isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -49,10 +49,10 @@ export class UserService {
 
     this.http.post<any>(URL_SIGNIN, body, { observe: 'response' }).subscribe(
       (response) => {
-        const extractedToken = JSON.parse(JSON.stringify(response)).body.authToken;
+        const extractedToken = response.body.authToken;
         //console.log("token :", extractedToken);
         this.user.token = extractedToken;
-        token = extractedToken;
+        //token = extractedToken;
         this.isAuthenticated = true;
 
         this.redirect();
@@ -66,6 +66,13 @@ export class UserService {
       }
     );
     return token;
+  }
+
+
+  logout() {
+    this.user = new User(-9999.9, 'nothing', 'nothing', "user");
+    this.isAuthenticated = false;
+    this.router.navigate(['login']);
   }
 
   redirect(): void {

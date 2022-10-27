@@ -10,6 +10,9 @@ import { UserModule } from './site/user/user.module';
 import { LoginModule } from './site/login/login.module';
 import { HeaderModule } from './site/header/header.module';
 import { FooterModule } from './site/footer/footer.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material-module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,13 +22,16 @@ import { FooterModule } from './site/footer/footer.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule,
     LoginModule,
     AdminModule,
     ManagerModule,
     UserModule,
     HeaderModule,
     FooterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

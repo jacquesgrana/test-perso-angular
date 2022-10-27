@@ -1,17 +1,24 @@
 
-<div class="container">
-  <div class="row">
-    <form class="offset-2 col-8" [formGroup]="form" (ngSubmit)="login()">
-      <div class="row mb-2">
-        <label class="col-4 text-end" for="pseudo">Pseudo</label>
-        <input class="col-4" type="text" [(ngModel)]="pseudo" formControlName="pseudo">
+<div class="flex-center body-container">
+  <div class="flex-center rounded-block" color="primary">
+    <form class="mt-2" [formGroup]="form" (ngSubmit)="login()">
+      <div class="mb-5 mt-5 block-element">
+        <h3 class="text-center"><strong>Login</strong></h3>
       </div>
-      <div class="row  mb-2">
-        <label class="col-4 text-end" for="password">Password</label>
-        <input class="col-4" type="password" [(ngModel)]="password" formControlName="password">
+      <div class="mb-5 mt-5 block-element">
+        <label class="text-end me-2" for="pseudo">Pseudo</label>
+        <input matInput placeholder="Pseudo" class="rounded-input" type="text" formControlName="pseudo">
       </div>
-      <div class="row  mb-2">
-        <button class="btn btn-primary col-4 offset-4" type="submit">Login</button>
+      <div class="mb-5 mt-5 block-element">
+        <label class="text-end me-2" for="password">Password</label>
+        <input matInput class="rounded-input" type="password" formControlName="password">
+      </div>
+      <div class="mb-5 mt-5 block-element flex-center">
+        <span class="spacer"></span>
+        <button mat-flat-button color="warn" class="" type="reset">Reset</button>
+        <span class="spacer"></span>
+        <button mat-flat-button color="primary" class="" type="submit">Login</button>
+        <span class="spacer"></span>
       </div>
     </form>
   </div>
