@@ -1,0 +1,18 @@
+
+<div class="container">
+  <div class="row">
+    <form class="offset-2 col-8" [formGroup]="form" (ngSubmit)="login()">
+      <div class="row mb-2">
+        <label class="col-4 text-end" for="pseudo">Pseudo</label>
+        <input class="col-4" type="text" [(ngModel)]="pseudo" formControlName="pseudo">
+      </div>
+      <div class="row  mb-2">
+        <label class="col-4 text-end" for="password">Password</label>
+        <input class="col-4" type="password" [(ngModel)]="password" formControlName="password">
+      </div>
+      <div class="row  mb-2">
+        <button class="btn btn-primary col-4 offset-4" type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
