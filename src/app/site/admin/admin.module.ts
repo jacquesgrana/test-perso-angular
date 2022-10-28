@@ -4,6 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatSortModule} from '@angular/material/sort'
 
 const routes: Routes =
 [
@@ -18,6 +23,11 @@ const routes: Routes =
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     RouterModule.forChild(routes)
   ]
 })

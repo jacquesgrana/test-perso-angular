@@ -4,4 +4,16 @@
 .body-container {
   margin-top: 10rem;
   margin-bottom: 10rem;
+  flex-grow: 1;
+  color: $components-foreground-color !important;
+}
+
+mat-table {
+  width: 80%;
+  background-color: $components-background-color-bis !important;
+}
+
+mat-header-cell,
+mat-cell {
+  color: $components-foreground-color !important;
 }

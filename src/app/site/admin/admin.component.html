@@ -1,17 +1,70 @@
-<div class="container body-container">
-<div class="row">
-  <h3 class="col-12 text-center mb-2">Page Admin</h3>
-</div>
-<div class="row">
-  <h4 class="col-12 text-center mb-2">Liste des Users</h4>
-</div>
-<ul>
-  <li class="row" *ngFor="let user of userList">
-    <span class="col-2">{{user.id}}</span>
-    <span class="col-4">{{user.userName}}</span>
-    <span class="col-3">{{user.role.label}}</span>
-  </li>
-</ul>
+<div class="body-container">
+  <div class="">
+    <h2 class="text-center mb-5">Page Admin</h2>
+  </div>
+  <div class="">
+    <h3 class="text-center mb-3">Liste des Users</h3>
+  </div>
+  <!--
+  <ul>
+    <li class="row" *ngFor="let user of userList">
+      <span class="col-2">{{user.id}}</span>
+      <span class="col-4">{{user.userName}}</span>
+      <span class="col-3">{{user.role.label}}</span>
+    </li>
+  </ul>
+-->
+  <div class="flex-center mt-3">
+    <mat-table [dataSource]="userList" class="mat-elevation-z4">
+      <ng-container matColumnDef="id">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.userName}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.role.label}}</mat-cell>
+      </ng-container>
 
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="">
+    <h3 class="text-center mt-3 mb-3">Liste des Animaux</h3>
+  </div>
+
+  <div class="flex-center mt-3">
+    <mat-table [dataSource]="animalList" class="mat-elevation-z4">
+      <ng-container matColumnDef="id">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.animalType.label}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="genre">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.genre}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="birth">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Birth</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.birth | date:'dd-MM-yyyy'}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
+    </mat-table>
+  </div>
 </div>

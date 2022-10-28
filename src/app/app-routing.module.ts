@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './site/admin/admin.component';
 import { LoginComponent } from './site/login/login.component';
+import { ManagerComponent } from './site/manager/manager.component';
+import { UserComponent } from './site/user/user.component';
 
 const routes: Routes = [
 
@@ -13,6 +15,14 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent
+  },
+  {
+    path: 'manager',
+    component: ManagerComponent
+  },
+  {
+    path: 'user',
+    component: UserComponent
   },
   {
     path: '**',
