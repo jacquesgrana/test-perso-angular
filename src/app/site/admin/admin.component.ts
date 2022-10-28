@@ -13,8 +13,8 @@ export class AdminComponent implements OnInit {
 
   userList !: any[];
   animalList !: Animal[];
-  displayedColumns: string[] = ['id', 'name', 'role'];
-  displayedAnimalsColumns: string[] = ['id', 'name', 'type', 'genre', 'birth'];
+  displayedColumns: string[] = ['id', 'name', 'role', 'nb-animals', 'actions']; //, 'nb-animals'
+  displayedAnimalsColumns: string[] = ['id', 'name', 'type', 'genre', 'birth', 'actions'];
 
   constructor(
     private router : Router,
@@ -38,6 +38,22 @@ export class AdminComponent implements OnInit {
         this.animalList = data;
       }
     );
+  }
+
+  editUser(user : any) {
+    console.log('edit user : ' + user);
+  }
+
+  deleteUser(user : any) {
+    console.log('delete user : ' + user);
+  }
+
+  editAnimal(animal : Animal) {
+    console.log('edit animal : ' + animal);
+  }
+
+  deleteAnimal(animal: Animal) {
+    console.log('delete animal : ' + animal);
   }
 
 }

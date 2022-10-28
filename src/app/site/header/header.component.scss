@@ -8,12 +8,13 @@ margin: 0;
 h1 {
   text-align: center;
   font-size: 3vh !important;
+  position:absolute;
 }
 
 .body-container {
   background-color: $components-foreground-color;
   min-width: 100%;
-  height: 10vh;
+  height: 12vh;
   color: $components-background-light-color;
   padding-bottom: 0.5rem;
 }

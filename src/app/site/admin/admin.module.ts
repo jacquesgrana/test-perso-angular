@@ -7,8 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { MatSortModule} from '@angular/material/sort'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule} from '@angular/material/sort';
+import { MaterialModule } from 'src/app/material-module';
+
 
 const routes: Routes =
 [
@@ -28,6 +30,7 @@ const routes: Routes =
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSortModule,
+    MaterialModule,
     RouterModule.forChild(routes)
   ]
 })
