@@ -1,0 +1,20 @@
+
+<h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label for="id">Id</mat-label>
+    <input matInput name="id" [(ngModel)]="data.user.id" disabled="true">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label for="pseudo">Pseudo</mat-label>
+    <input matInput name="pseudo" [(ngModel)]="data.user.userName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label for="role">Role</mat-label>
+    <input matInput name="role" [(ngModel)]="data.user.role.label">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="onNoClick()">Fermer</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="data.user" cdkFocusInitial>Valider</button>
+</div>

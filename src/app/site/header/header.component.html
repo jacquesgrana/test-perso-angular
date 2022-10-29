@@ -4,7 +4,7 @@
   </mat-toolbar-row>
   <mat-toolbar-row *ngIf="userService.isAuthenticated" >
     <span class="spacer"></span>
-    <span>Connecté sous : {{userService.user.username}}</span>
+    <span>Connecté sous : {{userService.user.userName}}</span>
     <button mat-flat-button color="warn" (click)="logout()" class="ms-2">Logout <mat-icon>logout</mat-icon></button>
   </mat-toolbar-row>
   <!-- else block -->

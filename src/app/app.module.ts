@@ -13,6 +13,7 @@ import { FooterModule } from './site/footer/footer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './site/shared/shared.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserModule,
     HeaderModule,
     FooterModule,
+    SharedModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],

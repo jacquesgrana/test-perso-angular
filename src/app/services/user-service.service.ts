@@ -4,6 +4,8 @@ import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { RoleEnum } from '../models/enums/roleEnum';
+import { Role } from '../models/role';
 
 
 
@@ -18,7 +20,7 @@ export class UserService {
 
 
   userList : any[] = [];
-  user: User = new User(-9999.9, 'nothing', 'nothing', "user");
+  user: User = new User(-9999, 'nothing', 'nothing', new Role(-1, RoleEnum.ROLE_USER), 'nothing');
   isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -29,8 +31,6 @@ export class UserService {
 
   is_authenticated(): boolean {
     //return this.user.token !== "token"; // TODO modifier
-
-
     return this.isAuthenticated;
   }
 
@@ -38,7 +38,8 @@ export class UserService {
 
   login(pseudo: string, password: string): string {
     let token = "token";
-    this.user = new User(-9999.9, pseudo, token, "user");
+    const role = new Role(-1, RoleEnum.ROLE_USER);
+    this.user = new User(-9999, pseudo, token, role, 'nothing');
     const body = {
       "username": pseudo,
       "password": password
@@ -47,15 +48,9 @@ export class UserService {
     this.http.post<any>(URL_SIGNIN, body, { observe: 'response' }).subscribe(
       (response) => {
         const extractedToken = response.body.authToken;
-        //console.log("token :", extractedToken);
         this.user.token = extractedToken;
-        //token = extractedToken;
         this.isAuthenticated = true;
-
         this.redirect();
-        // diriger selon les roles
-        //this.router.navigate(['admin']);
-
       },
       (error) => {
         this.isAuthenticated = false;
@@ -67,7 +62,8 @@ export class UserService {
 
 
   logout() {
-    this.user = new User(-9999.9, 'nothing', 'nothing', "user");
+    const role = new Role(-1, RoleEnum.ROLE_USER);
+    this.user = new User(-9999, 'nothing', 'nothing', role, 'nothing');
     this.isAuthenticated = false;
     this.router.navigate(['login']);
   }
@@ -76,7 +72,7 @@ export class UserService {
     // requete pour recuperer le role par son pseudo
     const headers = { 'Authorization': 'Bearer ' + this.user.token };
 
-    let resp = this.http.get<any>(URL_GET_ROLE_BY_USERNAME + "/" + this.user.username, { observe: 'response', headers: headers }).subscribe(
+    let resp = this.http.get<any>(URL_GET_ROLE_BY_USERNAME + "/" + this.user.userName, { observe: 'response', headers: headers }).subscribe(
       (response) => {
         const extractedRole = response.body.label;
         this.user.role = extractedRole;
@@ -98,7 +94,7 @@ export class UserService {
   getRoleByUsername() : any {
     let toReturn = "";
     const headers = { 'Authorization': 'Bearer ' + this.user.token };
-    let resp = this.http.get<any>(URL_GET_ROLE_BY_USERNAME + "/" + this.user.username, { observe: 'response', headers: headers }).subscribe(
+    let resp = this.http.get<any>(URL_GET_ROLE_BY_USERNAME + "/" + this.user.userName, { observe: 'response', headers: headers }).subscribe(
       (response) => {
         const extractedRole = response.body.label;
         return extractedRole;

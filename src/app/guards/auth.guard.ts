@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       //const role = this.userService.getRole();
       //console.log('guard : route :', route.toString());
 
-      const role = this.userService.user.role;
+      const role = this.userService.user.role.toString();
       //console.log('guard : role :', role);
       switch (role) {
         case 'ROLE_ADMIN':

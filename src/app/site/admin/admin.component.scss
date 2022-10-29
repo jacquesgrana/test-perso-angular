@@ -17,3 +17,11 @@ mat-header-cell,
 mat-cell {
   color: $components-foreground-color !important;
 }
+
+::ng-deep .dialog {
+  display: flex !important;
+  justify-content:flex-start !important;
+  flex-direction: column !important;
+}
+
+
