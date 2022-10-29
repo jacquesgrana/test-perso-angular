@@ -1,18 +1,27 @@
 
 <h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label for="id">Id</mat-label>
-    <input matInput name="id" [(ngModel)]="data.user.id" disabled="true">
+<div mat-dialog-content class="container">
+  <mat-form-field class="row" appearance="outline">
+    <mat-label for="id" class="col-6">Id</mat-label>
+    <input matInput name="id" type="text" [(ngModel)]="data.user.id" disabled="true" class="col-6">
   </mat-form-field>
-  <mat-form-field>
-    <mat-label for="pseudo">Pseudo</mat-label>
-    <input matInput name="pseudo" [(ngModel)]="data.user.userName">
+  <mat-form-field class="row" appearance="outline">
+    <mat-label for="pseudo" class="col-6">Pseudo</mat-label>
+    <input matInput name="pseudo" type="text" [(ngModel)]="data.user.userName" class="col-6">
   </mat-form-field>
-  <mat-form-field>
-    <mat-label for="role">Role</mat-label>
-    <input matInput name="role" [(ngModel)]="data.user.role.label">
+  <mat-form-field class="row" appearance="outline">
+    <mat-label for="password" class="col-6">Password</mat-label>
+    <input matInput name="password" type="text" [(ngModel)]="data.user.password" class="col-6">
   </mat-form-field>
+
+  <mat-form-field class="row" appearance="outline">
+    <mat-label for="role" class="col-6">Role</mat-label>
+    <mat-select [(value)]="data.user.role" [compareWith]="compareRoles" class="col-6">
+      <mat-option *ngFor="let role of roleService.roles" [value]="role" >{{roleService.toString(role)}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
 </div>
 <div mat-dialog-actions>
   <button mat-flat-button color="warn" (click)="onNoClick()">Fermer</button>

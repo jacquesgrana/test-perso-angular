@@ -63,14 +63,14 @@ export class AdminComponent implements OnInit {
   addUser(): void {
     console.log('add user');
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
-    const user = new User(-1, '', '', new Role(-1, RoleEnum.ROLE_USER), '');
+    const user = new User(-1, '', '', new Role(3, RoleEnum.ROLE_USER), '', []);
     this.openEditUser('Ajouter User', user);
   }
 
   editUser(user: User) {
     console.log('edit user : ' + user.userName);
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
-    this.openEditUser('Editer USer', user);
+    this.openEditUser('Editer User', user);
   }
 
   deleteUser(user: User) {
@@ -98,6 +98,7 @@ export class AdminComponent implements OnInit {
     dialogRefUser.afterClosed().subscribe(res => {
       // TODO modifier
       this.user = res;
+      console.log('user modifié :', user);
     });
   }
 

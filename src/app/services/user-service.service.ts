@@ -20,7 +20,7 @@ export class UserService {
 
 
   userList : any[] = [];
-  user: User = new User(-9999, 'nothing', 'nothing', new Role(-1, RoleEnum.ROLE_USER), 'nothing');
+  user: User = new User(-9999, 'nothing', 'nothing', new Role(-1, RoleEnum.ROLE_USER), 'nothing', []);
   isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -39,7 +39,7 @@ export class UserService {
   login(pseudo: string, password: string): string {
     let token = "token";
     const role = new Role(-1, RoleEnum.ROLE_USER);
-    this.user = new User(-9999, pseudo, token, role, 'nothing');
+    this.user = new User(-9999, pseudo, token, role, 'nothing', []);
     const body = {
       "username": pseudo,
       "password": password
@@ -62,8 +62,8 @@ export class UserService {
 
 
   logout() {
-    const role = new Role(-1, RoleEnum.ROLE_USER);
-    this.user = new User(-9999, 'nothing', 'nothing', role, 'nothing');
+    const role = new Role(3, RoleEnum.ROLE_USER);
+    this.user = new User(-9999, 'nothing', 'nothing', role, 'nothing', []);
     this.isAuthenticated = false;
     this.router.navigate(['login']);
   }
