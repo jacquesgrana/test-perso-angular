@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './site/admin/admin.component';
 import { LoginComponent } from './site/login/login.component';
 import { ManagerComponent } from './site/manager/manager.component';
 import { UserComponent } from './site/user/user.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 
@@ -14,15 +14,18 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manager',
-    component: ManagerComponent
+    component: ManagerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
-    component: UserComponent
+    component: UserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

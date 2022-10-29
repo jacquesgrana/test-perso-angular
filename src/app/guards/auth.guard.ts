@@ -13,9 +13,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): boolean {
 
-    if (this.userService.is_authenticated()) {
+      if(this.userService.isAuthenticated) {
+        return true;
+      }
+      else {
+        this.router.navigate(['login']);
+        return false;
+      }
+
+
+/*
+    if (this.userService.isAuthenticated) {
       // TODO checker les droits?? selon la route demandée?
       // requete pour recuperer les droits
       //const role = this.userService.getRole();
@@ -44,6 +54,7 @@ export class AuthGuard implements CanActivate {
       //return true;
     }
     return this.router.parseUrl('/login');
+*/
     //return this.router.navigate(['login']);
   }
 
