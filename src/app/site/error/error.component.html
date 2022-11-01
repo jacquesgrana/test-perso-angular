@@ -1,0 +1,9 @@
+<div class="body-container">
+  <div class="">
+    <h2 class="text-center mb-5">Page Error</h2>
+  </div>
+  <div class="flex-center mt-4 mb-2">
+    <button *ngIf="userService.isAuthenticated" mat-raised-button class="mat-elevation-z2" color="primary" (click)="userService.redirect()"><mat-icon>arrow_back</mat-icon>Retour</button>
+    <button *ngIf="!userService.isAuthenticated" mat-raised-button class="mat-elevation-z2" color="primary" routerLink="/login"><mat-icon>login</mat-icon>Login</button>
+  </div>
+</div>

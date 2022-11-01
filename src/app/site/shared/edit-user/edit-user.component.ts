@@ -16,6 +16,7 @@ export class EditUserComponent implements OnInit {
 
   hidePassword: boolean = true;
   isPasswordChanged: boolean = false;
+  //initialData: any;
 
   constructor(
     public roleService: RoleServiceService,
@@ -33,13 +34,17 @@ export class EditUserComponent implements OnInit {
         animals: []
       }
     }
-  ) { }
+  ) {
+
+   }
 
   onNoClick(): void {
+    //this.data = this.initialData;
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
+    //this.initialData = this.data;
   }
 
   compareRoles(o1: Role, o2: Role): boolean {

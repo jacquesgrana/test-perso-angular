@@ -15,6 +15,8 @@ import { MaterialModule } from './material-module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './site/shared/shared.module';
 import { UserService } from './services/user-service.service';
+import { AnimalServiceService } from './services/animal-service.service';
+import { ErrorModule } from './site/error/error.module';
 
 
 @NgModule({
@@ -30,13 +32,14 @@ import { UserService } from './services/user-service.service';
     AdminModule,
     ManagerModule,
     UserModule,
+    ErrorModule,
     HeaderModule,
     FooterModule,
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService], // TODO verifier utilité
+  providers: [UserService, AnimalServiceService], // TODO verifier utilité
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,10 +9,13 @@ const URL_API = "http://localhost:8090/api";
 const URL_SIGNIN = URL_API + "/signin";
 const URL_GET_USER_BY_USERNAME = URL_API + "/user/role"; // TODO corriger : URL_GET_ROLE_BY_USER
 const URL_GET_USER_LIST = URL_API + '/user/all';
-*/
-@Injectable({
+
+
+{
   providedIn: 'root'
-})
+}
+*/
+@Injectable()
 export class GenServiceService<T extends { id?: number }> {
 
   protected url: string = environment.URL_API;

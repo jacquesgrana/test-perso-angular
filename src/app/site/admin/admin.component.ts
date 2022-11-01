@@ -97,10 +97,14 @@ export class AdminComponent implements OnInit {
     });
     dialogRefUser.afterClosed().subscribe(data => {
       // TODO modifier
-      this.user = data.user;
-      console.log('user modifié :', user);
-      console.log('isUserCreation :', data.isUserCreation);
-
+      if (data != undefined) {
+        this.user = data.user;
+        console.log('user modifié :', user);
+        console.log('isUserCreation :', data.isUserCreation);
+      }
+      else {
+        console.log('user vide');
+      }
     });
   }
 

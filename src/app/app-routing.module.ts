@@ -5,6 +5,7 @@ import { LoginComponent } from './site/login/login.component';
 import { ManagerComponent } from './site/manager/manager.component';
 import { UserComponent } from './site/user/user.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ErrorComponent } from './site/error/error.component';
 
 const routes: Routes = [
 
@@ -28,8 +29,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '**',
-    redirectTo: 'login'
+    path: '**', //redirectTo: 'login'
+    component: ErrorComponent
   }
 ];
 /**

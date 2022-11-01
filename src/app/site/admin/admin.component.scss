@@ -11,11 +11,16 @@
 mat-table {
   width: 80%;
   background-color: $components-background-color-bis !important;
+  color: $components-foreground-color !important;
+  outline: 1px solid $components-foreground-color !important;
+  border-radius: 20px !important;
+  overflow:hidden !important;
 }
 
 mat-header-cell,
 mat-cell {
   color: $components-foreground-color !important;
+  min-height: 60px !important;
 }
 
 ::ng-deep .dialog, .dialog {
@@ -24,4 +29,6 @@ mat-cell {
   flex-direction: column !important;
 }
 
-
+.action-column, .mat-column-actions {
+  max-width: 200px !important;
+}
