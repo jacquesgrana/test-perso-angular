@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material-module';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes =
 [
@@ -18,6 +19,7 @@ const routes: Routes =
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

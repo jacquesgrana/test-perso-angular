@@ -23,12 +23,11 @@ export class GenServiceService<T extends { id?: number }> {
     private userService: UserService
     ) {
     //this.headers.set('Content-Type', 'application/json');
-    //this.headers.set('Access-Control-Allow-Origin', '*');
+    //this.headers.set('Access-Control-Allow-Origin', '*'); // renvoie une erreur cors dans le navigateur
     //this.headers.set('Authorization', 'Bearer ' + this.userService.user.token);
 
     this.headers = new HttpHeaders( {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
       'Authorization': 'Bearer ' + this.userService.user.token
     }
     );

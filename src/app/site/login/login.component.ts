@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     const pseudo = this.form.controls['pseudo'].value;
     const password = this.form.controls['password'].value;
     if (this.form.valid) {
-      const token = this.userService.login(pseudo, password);
+      this.userService.login(pseudo, password);
     }
 
   }

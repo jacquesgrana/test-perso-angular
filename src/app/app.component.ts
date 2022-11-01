@@ -7,8 +7,8 @@ import { UserService } from 'src/app/services/user-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'test-client-angular';
+  title = 'Test Client Angular';
 
-  constructor(public userService: UserService) {
+  constructor() {
   }
 }

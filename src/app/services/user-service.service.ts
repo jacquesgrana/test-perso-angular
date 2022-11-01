@@ -13,14 +13,13 @@ const URL_SIGNIN = environment.URL_API + "/signin";
 const URL_GET_ROLE_BY_USERNAME = environment.URL_API + "/user/role";
 const URL_GET_USER_LIST = environment.URL_API + '/user/all';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+  //root SharedModule // {providedIn: 'root'}
 export class UserService {
 
 
   userList : any[] = [];
-  user: User = new User(-9999, 'nothing', 'nothing', new Role(-1, RoleEnum.ROLE_USER), 'nothing', []);
+  user: User = new User(-1, '', 'token', new Role(3, RoleEnum.ROLE_USER), 'nothing', []);
   isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -28,20 +27,20 @@ export class UserService {
    }
 
 
-
+/*
   is_authenticated(): boolean {
     //return this.user.token !== "token"; // TODO modifier
     return this.isAuthenticated;
-  }
+  }*/
 
 
 
-  login(pseudo: string, password: string): string {
-    let token = "token";
-    const role = new Role(-1, RoleEnum.ROLE_USER);
-    this.user = new User(-9999, pseudo, token, role, 'nothing', []);
+  login(username: string, password: string): void {
+    //let token = '';
+    //const role = new Role(3, RoleEnum.ROLE_USER);
+    this.user = new User(-9999, username, '', new Role(3, RoleEnum.ROLE_USER), '', []);
     const body = {
-      "username": pseudo,
+      "username": username,
       "password": password
     }
 
@@ -57,13 +56,12 @@ export class UserService {
         console.log('error :', error);
       }
     );
-    return token;
   }
 
 
   logout() {
     const role = new Role(3, RoleEnum.ROLE_USER);
-    this.user = new User(-9999, 'nothing', 'nothing', role, 'nothing', []);
+    this.user = new User(-9999, '', '', role, '', []);
     this.isAuthenticated = false;
     this.router.navigate(['login']);
   }

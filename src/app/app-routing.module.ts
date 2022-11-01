@@ -32,10 +32,12 @@ const routes: Routes = [
     redirectTo: 'login'
   }
 ];
-
+/**
+ * useHash ajouté our éviter le rechargement de l'app quand on change l'url manuellement
+ */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)],
+    RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

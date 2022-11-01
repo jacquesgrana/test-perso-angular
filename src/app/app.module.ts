@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './site/shared/shared.module';
+import { UserService } from './services/user-service.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { SharedModule } from './site/shared/shared.module';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [UserService], // TODO verifier utilité
   bootstrap: [AppComponent]
 })
 export class AppModule { }

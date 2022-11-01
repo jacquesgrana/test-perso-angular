@@ -64,13 +64,13 @@ export class AdminComponent implements OnInit {
     console.log('add user');
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
     const user = new User(-1, '', '', new Role(3, RoleEnum.ROLE_USER), '', []);
-    this.openEditUser('Ajouter User', user);
+    this.openEditUser('Ajouter User', true, true, user);
   }
 
   editUser(user: User) {
     console.log('edit user : ' + user.userName);
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
-    this.openEditUser('Editer User', user);
+    this.openEditUser('Editer User', false, false, user);
   }
 
   deleteUser(user: User) {
@@ -89,16 +89,18 @@ export class AdminComponent implements OnInit {
     console.log('delete animal : ' + animal.name);
   }
 
-  openEditUser(title: string, user: User): void {
+  openEditUser(title: string, isUserCreation: boolean,isNewPassword: boolean, user: User): void {
     const dialogRefUser = this.dialogUser.open(EditUserComponent, {
       disableClose: true,
       panelClass: ['dialog'],
-      data: { title: title, user: user }
+      data: { title: title, isUserCreation: isUserCreation, isNewPassword: isNewPassword, user: user }
     });
-    dialogRefUser.afterClosed().subscribe(res => {
+    dialogRefUser.afterClosed().subscribe(data => {
       // TODO modifier
-      this.user = res;
+      this.user = data.user;
       console.log('user modifié :', user);
+      console.log('isUserCreation :', data.isUserCreation);
+
     });
   }
 
