@@ -29,6 +29,10 @@ mat-cell {
   flex-direction: column !important;
 }
 
-.action-column, .mat-column-actions {
-  max-width: 200px !important;
+.mat-column-id {
+  flex: 0 0 10%;
+}
+.mat-column-actions {
+  flex: 0 0 13%;
+  flex-wrap: wrap;
 }

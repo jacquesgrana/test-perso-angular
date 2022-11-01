@@ -8,7 +8,11 @@ import { AuthGuard } from './guards/auth.guard';
 import { ErrorComponent } from './site/error/error.component';
 
 const routes: Routes = [
-
+  {
+    path: '',
+    redirectTo:'\login',
+    pathMatch:"full"
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -28,13 +32,15 @@ const routes: Routes = [
     component: UserComponent,
     canActivate: [AuthGuard]
   },
+
   {
-    path: '**', //redirectTo: 'login'
+    path: '**',
     component: ErrorComponent
-  }
+  },
+
 ];
 /**
- * useHash ajouté our éviter le rechargement de l'app quand on change l'url manuellement
+ * useHash ajouté our éviter le rechargement de l'app par le navigateur quand on change l'url manuellement
  */
 @NgModule({
   imports: [
