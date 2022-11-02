@@ -24,6 +24,6 @@
 </div>
 <div mat-dialog-actions class="flex-buttons" >
   <button mat-flat-button color="warn" class="mb-2 button" (click)="onNoClick()"><mat-icon>close</mat-icon>Fermer</button>
-  <button mat-flat-button color="primary" class="mt-2 mb-4 button" [mat-dialog-close]="data" cdkFocusInitial><mat-icon>check</mat-icon>Valider</button>
+  <button mat-flat-button color="primary" class="mt-2 mb-4 button" (click)="onValidate()" [mat-dialog-close]="data" cdkFocusInitial><mat-icon>check</mat-icon>Valider</button>
 </div>
 <!-- isUserCreation -->

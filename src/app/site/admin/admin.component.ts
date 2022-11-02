@@ -101,6 +101,8 @@ export class AdminComponent implements OnInit {
         this.user = data.user;
         console.log('user modifié :', user);
         console.log('isUserCreation :', data.isUserCreation);
+        console.log('isNewPassword :', data.isNewPassword);
+        // appeler service pour create ou update l'user selon isUserCreation
       }
       else {
         console.log('user vide');

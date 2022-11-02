@@ -16,15 +16,23 @@ export class EditUserComponent implements OnInit {
 
   hidePassword: boolean = true;
   isPasswordChanged: boolean = false;
-  //initialData: any;
+  initialData: any;
+  initialRole!: Role;
+  initialPassword!: string;
+  initialUsername!: string;
+  initialUser!: User;
+
+  //isUserCreation: boolean = true;
+  //isNewPassword: boolean = true;
+
 
   constructor(
     public roleService: RoleServiceService,
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       title: '',
-      isUserCreation: true,
-      isNewPassword: true,
+      isUserCreation: boolean,
+      isNewPassword: boolean,
       user: {
         id: 0,
         userName: '',
@@ -39,12 +47,33 @@ export class EditUserComponent implements OnInit {
    }
 
   onNoClick(): void {
-    //this.data = this.initialData;
+    this.initialData.user = this.initialUser;
+    this.initialData.user.role = this.initialRole;
+    this.initialData.user.password = this.initialPassword;
+    this.initialData.user.userName = this.initialUsername;
+    this.data = { ...this.initialData};
+    //console.log('close edit user - data :', this.initialData);
     this.dialogRef.close();
   }
 
+  onValidate(): void {
+
+    if (this.initialPassword != this.data.user.password) {
+      this.data.isNewPassword = true;
+    }
+    else {
+      this.data.isNewPassword = false;
+    }
+  }
+
   ngOnInit(): void {
-    //this.initialData = this.data;
+    this.initialData = { ...this.data};
+    this.initialUser = this.initialData.user;
+    this.initialRole = this.data.user.role;
+    this.initialPassword = this.initialData.user.password;
+    this.initialUsername = this.initialData.user.userName;
+    //console.log('init edit user - data :', this.initialData);
+
   }
 
   compareRoles(o1: Role, o2: Role): boolean {
