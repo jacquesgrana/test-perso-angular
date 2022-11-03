@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from './../shared/edit-user/edit-user.component';
 import { RoleEnum } from 'src/app/models/enums/roleEnum';
 import { Role } from 'src/app/models/role';
+import { ErrorServiceService } from 'src/app/services/error-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -35,6 +37,7 @@ export class AdminComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private animalService: AnimalServiceService,
+    private errorService: ErrorServiceService,
     public dialogUser: MatDialog
   ) {
   }
@@ -48,6 +51,10 @@ export class AdminComponent implements OnInit {
     this.userService.getUserList().subscribe(
       data => {
         this.userList = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
       }
     );
   }
@@ -56,6 +63,10 @@ export class AdminComponent implements OnInit {
     this.animalService.getAll().subscribe( // .getAnimalList()
       data => {
         this.animalList = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
       }
     );
   }
@@ -81,6 +92,10 @@ export class AdminComponent implements OnInit {
         // TODO ajouter ouverture alert pour avertir que tout est ok
         console.log('delete request ok');
         this.getUserList();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
       }
     );
   }
@@ -126,7 +141,8 @@ export class AdminComponent implements OnInit {
               console.log('post request ok');
               this.getUserList();
             }, // TODO améliorer affichage de l'erreur
-            (error) => {
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
             }
           );
@@ -138,7 +154,8 @@ export class AdminComponent implements OnInit {
               console.log('put request ok');
               this.getUserList();
             }, // TODO améliorer affichage de l'erreur
-            (error) => {
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
             }
           );

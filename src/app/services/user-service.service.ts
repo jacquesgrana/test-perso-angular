@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RoleEnum } from '../models/enums/roleEnum';
 import { Role } from '../models/role';
+import { ErrorServiceService } from './error-service.service';
 
 
 
@@ -26,7 +27,11 @@ export class UserService {
   user: User = new User(-1, '', 'token', new Role(3, RoleEnum.ROLE_USER), 'nothing', []);
   isAuthenticated: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private errorService: ErrorServiceService
+    ) {
 
    }
 
@@ -57,6 +62,7 @@ export class UserService {
       },
       (error) => {
         this.isAuthenticated = false;
+        this.errorService.setError(error.status, error.comment);
         this.router.navigate(['error']);
         console.log('error :', error);
       }

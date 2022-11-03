@@ -17,6 +17,7 @@ import { SharedModule } from './site/shared/shared.module';
 import { UserService } from './services/user-service.service';
 import { AnimalServiceService } from './services/animal-service.service';
 import { ErrorModule } from './site/error/error.module';
+import { ErrorServiceService } from './services/error-service.service';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { ErrorModule } from './site/error/error.module';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService, AnimalServiceService], // TODO verifier utilité
+  providers: [UserService, AnimalServiceService, ErrorServiceService], // TODO verifier utilité
   bootstrap: [AppComponent]
 })
 export class AppModule { }

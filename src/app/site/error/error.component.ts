@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { UserService } from 'src/app/services/user-service.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { UserService } from 'src/app/services/user-service.service';
 export class ErrorComponent implements OnInit {
 
   constructor(
-    public userService : UserService
+    public userService : UserService,
+    public errorService : ErrorServiceService
   ) {
    }
 
