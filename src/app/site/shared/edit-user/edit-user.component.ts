@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {
       title: '',
       isUserCreation: boolean,
-      isNewPassword: boolean,
+      //isNewPassword: boolean,
       user: {
         id: 0,
         userName: '',
@@ -56,6 +56,7 @@ export class EditUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /*
   onValidate(): void {
 
     if (this.initialPassword != this.data.user.password) {
@@ -64,7 +65,7 @@ export class EditUserComponent implements OnInit {
     else {
       this.data.isNewPassword = false;
     }
-  }
+  }*/
 
   ngOnInit(): void {
     this.initialData = { ...this.data};

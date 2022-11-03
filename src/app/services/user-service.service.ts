@@ -133,27 +133,6 @@ export class UserService {
       "animals": user.animals
     };
     console.log('user service : update user : unserName :', user.userName);
-
-    /*
-    if(isNewPassword) {
-      userDto = {
-        "userName": user.userName,
-        "password": user.password,
-        "active": true, // TODO améliorer
-        "role": user.role,
-        "animals": user.animals
-      };
-    }
-    else {
-      userDto = {
-        "userName": user.userName,
-        "password": user.password,
-        "active": true, // TODO améliorer
-        "role": user.role,
-        "animals": user.animals
-      };
-    }*/
-
     const headers = { 'Authorization': 'Bearer ' + this.user.token };
     return this.http.put<User>(URL_UPDATE_USER + '/' + user.id, userDto, { 'headers': headers });
   }

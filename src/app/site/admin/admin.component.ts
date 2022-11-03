@@ -64,13 +64,13 @@ export class AdminComponent implements OnInit {
     console.log('add user');
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
     const user = new User(-1, '', '', new Role(3, RoleEnum.ROLE_USER), '', []);
-    this.openEditUser('Ajouter User', true, true, user);
+    this.openEditUser('Ajouter User', true, user);
   }
 
   editUser(user: User) {
     console.log('edit user : ' + user.userName);
     //this.isEditUserDivOpen = !this.isEditUserDivOpen;
-    this.openEditUser('Editer User', false, false, user);
+    this.openEditUser('Editer User', false, user);
   }
 
   deleteUser(user: User) {
@@ -89,21 +89,27 @@ export class AdminComponent implements OnInit {
     console.log('delete animal : ' + animal.name);
   }
 
-  openEditUser(title: string, isUserCreation: boolean,isNewPassword: boolean, user: User): void {
+  /**
+   * TODO enlever booleen isNewPassword
+   * @param title
+   * @param isUserCreation
+   * @param isNewPassword
+   * @param user
+   */
+  openEditUser(title: string, isUserCreation: boolean, user: User): void {
     const dialogRefUser = this.dialogUser.open(EditUserComponent, {
       disableClose: true,
       panelClass: ['dialog'],
-      data: { title: title, isUserCreation: isUserCreation, isNewPassword: isNewPassword, user: user }
+      data: { title: title, isUserCreation: isUserCreation, user: user }
     });
     dialogRefUser.afterClosed().subscribe(data => {
       // TODO modifier
       if (data != undefined) {
         this.user = data.user;
-        console.log('user modifié :', user);
-        console.log('isUserCreation :', data.isUserCreation);
-        console.log('isNewPassword :', data.isNewPassword);
+        //console.log('user modifié :', user);
+        //console.log('isUserCreation :', data.isUserCreation);
+        //console.log('isNewPassword :', data.isNewPassword);
 
-        // appeler service pour create ou update l'user selon isUserCreation
         if(data.isUserCreation) {
           this.userService.createUser(user).subscribe(
             (response) => {
@@ -112,7 +118,7 @@ export class AdminComponent implements OnInit {
             }
           );
         }
-        else {  //, data.isNewPassword
+        else {
           this.userService.updateUser(user).subscribe(
             (response) => {
               console.log('put request ok');
