@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   URL_API: "http://localhost:8090/api",
   URL_SIGNIN: "/signin",
-  URL_GET_ROLE_BY_USERNAME: "/user/role", // TODO corriger : URL_GET_ROLE_BY_USER
+  URL_GET_ROLE_BY_USERNAME: "/user/role",
   URL_GET_USER_LIST: "/user/all",
   URL_ANIMAL: "/animal",
   URL_ANIMAL_TYPE: "/animaltype",

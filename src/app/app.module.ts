@@ -18,6 +18,7 @@ import { UserService } from './services/user-service.service';
 import { AnimalServiceService } from './services/animal-service.service';
 import { ErrorModule } from './site/error/error.module';
 import { ErrorServiceService } from './services/error-service.service';
+import { AnimalTypeServiceService } from './services/animal-type-service.service';
 
 
 @NgModule({
@@ -40,7 +41,12 @@ import { ErrorServiceService } from './services/error-service.service';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService, AnimalServiceService, ErrorServiceService], // TODO verifier utilité
+  providers: [
+    UserService,
+    AnimalServiceService,
+    AnimalTypeServiceService,
+    ErrorServiceService
+  ], // TODO verifier utilité
   bootstrap: [AppComponent]
 })
 export class AppModule { }

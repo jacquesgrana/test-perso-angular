@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Animal } from 'src/app/models/animal';
-import { User } from 'src/app/models/user'
+import { User } from 'src/app/models/user';
+import { AnimalType } from 'src/app/models/animal-type';
 import { AnimalServiceService } from 'src/app/services/animal-service.service';
 import { UserService } from 'src/app/services/user-service.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +11,7 @@ import { RoleEnum } from 'src/app/models/enums/roleEnum';
 import { Role } from 'src/app/models/role';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -20,8 +22,10 @@ export class AdminComponent implements OnInit {
 
   userList !: User[]; // TODO changer type : User ou UserDto (à créer)
   animalList !: Animal[];
+  animalTypeList !: AnimalType[];
   displayedColumns: string[] = ['id', 'name', 'role', 'nb-animals', 'actions']; //, 'nb-animals'
   displayedAnimalsColumns: string[] = ['id', 'name', 'type', 'genre', 'birth', 'actions'];
+  displayedAnimalTypesColumns: string[] = ['id', 'label', 'actions'];
   //isEditUserDivOpen: boolean = false;
 
 
@@ -37,6 +41,7 @@ export class AdminComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private animalService: AnimalServiceService,
+    private animalTypeService: AnimalTypeServiceService,
     private errorService: ErrorServiceService,
     public dialogUser: MatDialog
   ) {
@@ -45,6 +50,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.getUserList();
     this.getAnimalList();
+    this.getAnimalTypeList();
   }
 
   getUserList(): void {
@@ -63,6 +69,19 @@ export class AdminComponent implements OnInit {
     this.animalService.getAll().subscribe( // .getAnimalList()
       data => {
         this.animalList = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
+      }
+    );
+  }
+
+  getAnimalTypeList(): void {
+    this.animalTypeService.getAll().subscribe(
+      data => {
+        this.animalTypeList = data;
+        console.log('animal type list :', this.animalTypeList);
       },
       (error: HttpErrorResponse) => {
         this.errorService.setError(error.statusText, error.message);
@@ -110,6 +129,19 @@ export class AdminComponent implements OnInit {
 
   deleteAnimal(animal: Animal) {
     console.log('delete animal : ' + animal.name);
+
+  }
+
+  addAnimalType(): void {
+    console.log('add animal type');
+  }
+
+  editAnimalType(animalType: AnimalType) {
+    console.log('edit animal type : ' + animalType.label);
+  }
+
+  deleteAnimalType(animalType: AnimalType) {
+    console.log('delete animal type : ' + animalType.label);
 
   }
 
