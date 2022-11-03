@@ -14,6 +14,7 @@ const URL_GET_ROLE_BY_USERNAME = environment.URL_API + "/user/role";
 const URL_GET_USER_LIST = environment.URL_API + '/user/all';
 const URL_CREATE_USER = environment.URL_API + '/admin/create';
 const URL_UPDATE_USER = environment.URL_API + '/admin/update';
+const URL_DELETE_USER = environment.URL_API + '/admin/delete';
 
 
 @Injectable()
@@ -135,5 +136,10 @@ export class UserService {
     console.log('user service : update user : unserName :', user.userName);
     const headers = { 'Authorization': 'Bearer ' + this.user.token };
     return this.http.put<User>(URL_UPDATE_USER + '/' + user.id, userDto, { 'headers': headers });
+  }
+
+  deleteUser(idUserToDelete: number): Observable<User> {
+    const headers = { 'Authorization': 'Bearer ' + this.user.token };
+    return this.http.delete<User>(URL_DELETE_USER + '/' + idUserToDelete, { 'headers': headers });
   }
 }

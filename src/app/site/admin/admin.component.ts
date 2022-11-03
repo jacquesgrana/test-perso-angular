@@ -74,7 +74,15 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUser(user: User) {
+    // TODO ajouter ouverture alert pour demander confirmation
     console.log('delete user : ' + user.userName);
+    this.userService.deleteUser(user.id).subscribe(
+      (response) => {
+        // TODO ajouter ouverture alert pour avertir que tout est ok
+        console.log('delete request ok');
+        this.getUserList();
+      }
+    );
   }
 
   addAnimal(): void {
@@ -87,6 +95,7 @@ export class AdminComponent implements OnInit {
 
   deleteAnimal(animal: Animal) {
     console.log('delete animal : ' + animal.name);
+
   }
 
   /**
@@ -113,16 +122,24 @@ export class AdminComponent implements OnInit {
         if(data.isUserCreation) {
           this.userService.createUser(user).subscribe(
             (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('post request ok');
               this.getUserList();
+            }, // TODO améliorer affichage de l'erreur
+            (error) => {
+              this.router.navigate(['error']);
             }
           );
         }
         else {
           this.userService.updateUser(user).subscribe(
             (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request ok');
               this.getUserList();
+            }, // TODO améliorer affichage de l'erreur
+            (error) => {
+              this.router.navigate(['error']);
             }
           );
         }
