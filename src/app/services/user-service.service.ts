@@ -12,6 +12,9 @@ import { Role } from '../models/role';
 const URL_SIGNIN = environment.URL_API + "/signin";
 const URL_GET_ROLE_BY_USERNAME = environment.URL_API + "/user/role";
 const URL_GET_USER_LIST = environment.URL_API + '/user/all';
+const URL_CREATE_USER = environment.URL_API + '/admin/create';
+const URL_UPDATE_USER = environment.URL_API + '/admin/update';
+
 
 @Injectable()
   //root SharedModule // {providedIn: 'root'}
@@ -53,6 +56,7 @@ export class UserService {
       },
       (error) => {
         this.isAuthenticated = false;
+        this.router.navigate(['error']);
         console.log('error :', error);
       }
     );
@@ -105,5 +109,52 @@ export class UserService {
   getUserList(): Observable<User[]> {
     const headers = { 'Authorization': 'Bearer ' + this.user.token };
     return this.http.get<User[]>(URL_GET_USER_LIST, {headers: headers });
+  }
+
+  createUser(user: User): Observable<User> {
+    console.log('create user');
+    const userDto = {
+      "userName": user.userName,
+      "password": user.password,
+      "active": true,
+      "role": user.role,
+      "animals": []
+    };
+    const headers = { 'Authorization': 'Bearer ' + this.user.token };
+    return this.http.post<User>(URL_CREATE_USER, userDto, { 'headers': headers });
+  }
+
+  updateUser(user: User): Observable<User> { // enlever param booleen // , isNewPassword: boolean
+    let userDto = {
+      "userName": user.userName,
+      "password": user.password,
+      "active": true, // TODO améliorer
+      "role": user.role,
+      "animals": user.animals
+    };
+    console.log('user service : update user : unserName :', user.userName);
+
+    /*
+    if(isNewPassword) {
+      userDto = {
+        "userName": user.userName,
+        "password": user.password,
+        "active": true, // TODO améliorer
+        "role": user.role,
+        "animals": user.animals
+      };
+    }
+    else {
+      userDto = {
+        "userName": user.userName,
+        "password": user.password,
+        "active": true, // TODO améliorer
+        "role": user.role,
+        "animals": user.animals
+      };
+    }*/
+
+    const headers = { 'Authorization': 'Bearer ' + this.user.token };
+    return this.http.put<User>(URL_UPDATE_USER + '/' + user.id, userDto, { 'headers': headers });
   }
 }
