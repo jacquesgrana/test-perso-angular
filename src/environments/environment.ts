@@ -11,7 +11,10 @@ export const environment = {
   URL_ANIMAL: "/animal",
   URL_ANIMAL_TYPE: "/animaltype",
   URL_USER: "/user",
-  URL_GET_LIST: "/all"
+  URL_GET_LIST: "/all",
+  URL_CREATE: "/create",
+  URL_UPDATE: "/update",
+  URL_DELETE: "/delete"
 };
 
 /*

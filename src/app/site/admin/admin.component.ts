@@ -12,6 +12,7 @@ import { Role } from 'src/app/models/role';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.service';
+import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-type.component';
 
 @Component({
   selector: 'app-admin',
@@ -35,6 +36,7 @@ export class AdminComponent implements OnInit {
 
   user!: User;
   //animal !: Animal;
+  animalType!: AnimalType;
 
   constructor(
     private router: Router,
@@ -134,15 +136,28 @@ export class AdminComponent implements OnInit {
 
   addAnimalType(): void {
     console.log('add animal type');
+    const animalType = new AnimalType(-1, '');
+    this.openEditAnimalType('Ajouter Type d\'animaux', true, animalType);
   }
 
   editAnimalType(animalType: AnimalType) {
     console.log('edit animal type : ' + animalType.label);
+    this.openEditAnimalType('Editer Type d\'animaux', false, animalType);
   }
 
   deleteAnimalType(animalType: AnimalType) {
     console.log('delete animal type : ' + animalType.label);
-
+    this.animalTypeService.delete(animalType.id).subscribe(
+      (response) => {
+        // TODO ajouter ouverture alert pour avertir que tout est ok
+        console.log('delete animal type request ok');
+        this.getAnimalTypeList();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
+      }
+    );
   }
 
   /**
@@ -167,7 +182,7 @@ export class AdminComponent implements OnInit {
         //console.log('isNewPassword :', data.isNewPassword);
 
         if(data.isUserCreation) {
-          this.userService.createUser(user).subscribe(
+          this.userService.createUser(this.user).subscribe(
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('post request ok');
@@ -180,7 +195,7 @@ export class AdminComponent implements OnInit {
           );
         }
         else {
-          this.userService.updateUser(user).subscribe(
+          this.userService.updateUser(this.user).subscribe(
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request ok');
@@ -199,4 +214,49 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  openEditAnimalType(title: string, isAnimalTypeCreation : boolean, animalType: AnimalType): void {
+    const dialogRefUser = this.dialogUser.open(EditAnimalTypeComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: { title: title, isAnimalTypeCreation: isAnimalTypeCreation, animalType: animalType }
+    });
+    dialogRefUser.afterClosed().subscribe(data => {
+      // TODO modifier
+      if (data != undefined) {
+        this.animalType = data.animalType;
+        //console.log('user modifié :', user);
+        //console.log('isUserCreation :', data.isUserCreation);
+        //console.log('isNewPassword :', data.isNewPassword);
+
+        if(data.isAnimalTypeCreation) {
+          this.animalTypeService.add(this.animalType).subscribe(
+            (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
+              this.getAnimalTypeList();
+            }, // TODO améliorer affichage de l'erreur
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
+              this.router.navigate(['error']);
+            }
+          );
+        }
+        else {
+          this.animalTypeService.update(this.animalType).subscribe(
+            (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
+              console.log('put request animal type ok');
+              this.getAnimalTypeList();
+            }, // TODO améliorer affichage de l'erreur
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
+              this.router.navigate(['error']);
+            }
+          );
+        }
+      }
+      else {
+        console.log('animal type vide');
+      }
+    });
+  }
 }

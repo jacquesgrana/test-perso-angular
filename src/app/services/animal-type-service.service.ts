@@ -7,4 +7,6 @@ import { GenServiceService } from './gen-service.service';
 export class AnimalTypeServiceService extends GenServiceService<AnimalType> {
   override url = environment.URL_API + environment.URL_ANIMAL_TYPE;
 
+  
+
 }

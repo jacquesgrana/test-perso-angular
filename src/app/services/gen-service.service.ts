@@ -42,7 +42,7 @@ export class GenServiceService<T extends { id?: number }> {
    * @returns
    */
   add(data: T): Observable<T> {
-    return this.http.post<T>(this.url, data, { 'headers': this.headers })
+    return this.http.post<T>(this.url + environment.URL_CREATE, data, { 'headers': this.headers })
   }
 
   /**
@@ -51,7 +51,7 @@ export class GenServiceService<T extends { id?: number }> {
    * @returns
    */
   update(data: T): Observable<T> {
-    return this.http.put<T>(`${this.url + '/' + data.id}`, data, { 'headers': this.headers });
+    return this.http.put<T>(`${this.url + environment.URL_UPDATE + '/' + data.id}`, data, { 'headers': this.headers });
   }
 
   getAll(): Observable<T[]> {
@@ -63,7 +63,7 @@ export class GenServiceService<T extends { id?: number }> {
   }
 
   delete(id: number): Observable<T> {
-    return this.http.delete<T>(`${this.url + '/' + id}`, { 'headers': this.headers });
+    return this.http.delete<T>(`${this.url + environment.URL_DELETE + '/' + id}`, { 'headers': this.headers });
   }
 
 }

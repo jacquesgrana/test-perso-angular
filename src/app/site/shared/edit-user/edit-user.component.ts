@@ -42,9 +42,7 @@ export class EditUserComponent implements OnInit {
         animals: []
       }
     }
-  ) {
-
-   }
+  ) { }
 
   onNoClick(): void {
     this.initialData.user = this.initialUser;
@@ -70,7 +68,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.initialData = { ...this.data};
     this.initialUser = this.initialData.user;
-    this.initialRole = this.data.user.role;
+    this.initialRole = this.initialData.user.role;
     this.initialPassword = this.initialData.user.password;
     this.initialUsername = this.initialData.user.userName;
     //console.log('init edit user - data :', this.initialData);
