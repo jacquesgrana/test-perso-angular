@@ -4,13 +4,15 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditAnimalTypeComponent } from './edit-animal-type/edit-animal-type.component';
 import { MaterialModule } from 'src/app/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditAnimalComponent } from './edit-animal/edit-animal.component';
 
 
 
 @NgModule({
   declarations: [
     EditUserComponent,
-    EditAnimalTypeComponent
+    EditAnimalTypeComponent,
+    EditAnimalComponent
   ],
   imports: [
     CommonModule,

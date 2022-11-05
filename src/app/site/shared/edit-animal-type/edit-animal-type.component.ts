@@ -1,7 +1,6 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { AnimalType } from 'src/app/models/animal-type';
-import { AnimalServiceService } from 'src/app/services/animal-service.service';
 
 @Component({
   selector: 'app-edit-animal-type',
@@ -10,14 +9,13 @@ import { AnimalServiceService } from 'src/app/services/animal-service.service';
 })
 export class EditAnimalTypeComponent implements OnInit {
 
-  animalType: AnimalType = new AnimalType(-1, '');
+  //animalType: AnimalType = new AnimalType(-1, '');
 
   initialData: any;
   initialLabel!: string;
   initialAnimalType!: AnimalType;
 
   constructor(
-    public animalTypeService : AnimalServiceService,
     public dialogRef: MatDialogRef<EditAnimalTypeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       title: '',

@@ -1,0 +1,38 @@
+<h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content class="flex">
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="id" class="">Id</mat-label>
+    <input matInput name="id" type="text" [(ngModel)]="data.animal.id" disabled="true" class="">
+  </mat-form-field>
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="name" class="">Name</mat-label>
+    <input matInput name="name" type="text" [(ngModel)]="data.animal.name" class="">
+  </mat-form-field>
+
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="animalType" class="">Type</mat-label>
+    <mat-select [(value)]="data.animal.animalType" [compareWith]="compareAnimalTypes" class="">
+      <mat-option *ngFor="let animalType of animalTypeList" [value]="animalType" >{{animalType.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="genre" class="">Genre</mat-label>
+    <mat-select [(value)]="data.animal.genre" [compareWith]="compareGenres" class="">
+      <mat-option *ngFor="let genre of genreList" [value]="genre" >{{genre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="comment" class="">Comment</mat-label>
+    <input matInput name="comment" type="text" [(ngModel)]="data.animal.comment" class="">
+  </mat-form-field>
+  <mat-form-field class="" appearance="outline">
+    <mat-label for="birth" class="">Birth</mat-label>
+    <input matInput name="birth" type="date" [(ngModel)]="data.animal.birth" class="">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="flex-buttons" >
+  <button mat-flat-button color="warn" class="mb-2 button" (click)="onNoClick()"><mat-icon>close</mat-icon>Fermer</button>
+  <button mat-flat-button color="primary" class="mt-2 mb-4 button" [mat-dialog-close]="data" cdkFocusInitial><mat-icon>check</mat-icon>Valider</button>
+</div>

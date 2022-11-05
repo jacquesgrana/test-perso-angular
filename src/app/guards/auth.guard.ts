@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
           }
     */
 
-    console.log('is auth :', this.userService.isAuthenticated);
-    console.log('token :', this.userService.user.token);
+    //console.log('is auth :', this.userService.isAuthenticated);
+    //console.log('token :', this.userService.user.token);
 
 
 

@@ -13,6 +13,8 @@ import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.service';
 import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-type.component';
+import { EditAnimalComponent } from '../shared/edit-animal/edit-animal.component';
+import { Genre } from 'src/app/models/enums/genre';
 
 @Component({
   selector: 'app-admin',
@@ -35,8 +37,9 @@ export class AdminComponent implements OnInit {
   color!: string;
 
   user!: User;
-  //animal !: Animal;
+  animal !: Animal;
   animalType!: AnimalType;
+
 
   constructor(
     private router: Router,
@@ -83,7 +86,7 @@ export class AdminComponent implements OnInit {
     this.animalTypeService.getAll().subscribe(
       data => {
         this.animalTypeList = data;
-        console.log('animal type list :', this.animalTypeList);
+        //console.log('animal type list :', this.animalTypeList);
       },
       (error: HttpErrorResponse) => {
         this.errorService.setError(error.statusText, error.message);
@@ -123,26 +126,48 @@ export class AdminComponent implements OnInit {
 
   addAnimal(): void {
     console.log('add animal');
+    const animalType: AnimalType = new AnimalType(1,'Chat');
+    const birth: Date = new Date('1999-12-31');
+    const animal = new Animal(
+      -1,
+       animalType,
+       '',
+       '',
+       Genre.MALE,
+       birth
+       );
+    this.openEditAnimal('Ajouter un animal', true, animal);
   }
 
   editAnimal(animal: Animal) {
     console.log('edit animal : ' + animal.name);
+    this.openEditAnimal('Editer un animal', false, animal);
   }
 
   deleteAnimal(animal: Animal) {
     console.log('delete animal : ' + animal.name);
-
+    this.animalService.delete(animal.id).subscribe(
+      (response) => {
+        // TODO ajouter ouverture alert pour avertir que tout est ok
+        console.log('delete animal request ok');
+        this.getAnimalList();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
+      }
+    );
   }
 
   addAnimalType(): void {
     console.log('add animal type');
     const animalType = new AnimalType(-1, '');
-    this.openEditAnimalType('Ajouter Type d\'animaux', true, animalType);
+    this.openEditAnimalType('Ajouter un Type d\'animaux', true, animalType);
   }
 
   editAnimalType(animalType: AnimalType) {
     console.log('edit animal type : ' + animalType.label);
-    this.openEditAnimalType('Editer Type d\'animaux', false, animalType);
+    this.openEditAnimalType('Editer un Type d\'animaux', false, animalType);
   }
 
   deleteAnimalType(animalType: AnimalType) {
@@ -213,6 +238,50 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  openEditAnimal(title: string, isAnimalCreation : boolean, animal: Animal): void {
+    const dialogRefUser = this.dialogUser.open(EditAnimalComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: { title: title, isAnimalCreation: isAnimalCreation, animal: animal }
+    });
+    dialogRefUser.afterClosed().subscribe(data => {
+      if (data != undefined) {
+        this.animal = data.animal;
+        if(data.isAnimalCreation) {
+          this.animalService.add(this.animal).subscribe(
+            (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
+              console.log('post request animal ok');
+              this.getAnimalList();
+            },
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
+              this.router.navigate(['error']);
+            }
+          );
+        }
+        else {
+          this.animalService.update(this.animal).subscribe(
+            (response) => {
+              // TODO ajouter ouverture alert pour avertir que tout est ok
+              console.log('put request animal ok');
+              this.getAnimalList();
+            },
+            (error: HttpErrorResponse) => {
+              this.errorService.setError(error.statusText, error.message);
+              this.router.navigate(['error']);
+            }
+          );
+        }
+      }
+      else {
+        console.log('animal vide');
+      }
+    });
+  }
+
+
 
   openEditAnimalType(title: string, isAnimalTypeCreation : boolean, animalType: AnimalType): void {
     const dialogRefUser = this.dialogUser.open(EditAnimalTypeComponent, {
