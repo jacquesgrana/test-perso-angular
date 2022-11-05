@@ -1,0 +1,55 @@
+@import "src/library";
+@import "src/theme";
+
+
+.flex {
+  display: flex;
+  justify-content:flex-start;
+  flex-direction: column;
+}
+
+.flex-buttons {
+  display: flex;
+  justify-content:center;
+  flex-direction: column;
+}
+
+.button {
+  width: 120px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: $components-background-light-color !important;
+  color: $components-foreground-color !important;
+  border-radius: 10px !important;
+}
+
+.mat-column-actions {
+  flex: 0 0 10%;
+  flex-wrap: wrap;
+}
+
+mat-table {
+  background-color: $components-background-color-bis !important;
+  color: $components-foreground-color !important;
+  outline: 1px solid $components-foreground-color !important;
+  border-radius: 10px !important;
+  max-height: 70% !important;
+  margin-bottom: 2rem;
+}
+
+mat-header-cell,
+mat-cell {
+  color: $components-foreground-color !important;
+  min-height: 60px !important;
+}
+
+::ng-deep .dialog, .dialog {
+  display: flex !important;
+  justify-content:flex-start !important;
+  flex-direction: column !important;
+}

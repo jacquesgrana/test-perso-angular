@@ -5,6 +5,7 @@ import { EditAnimalTypeComponent } from './edit-animal-type/edit-animal-type.com
 import { MaterialModule } from 'src/app/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditAnimalComponent } from './edit-animal/edit-animal.component';
+import { ManageAnimalLinksComponent } from './manage-animal-links/manage-animal-links.component';
 
 
 
@@ -12,7 +13,8 @@ import { EditAnimalComponent } from './edit-animal/edit-animal.component';
   declarations: [
     EditUserComponent,
     EditAnimalTypeComponent,
-    EditAnimalComponent
+    EditAnimalComponent,
+    ManageAnimalLinksComponent
   ],
   imports: [
     CommonModule,

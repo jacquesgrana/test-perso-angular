@@ -15,6 +15,7 @@ import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.s
 import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-type.component';
 import { EditAnimalComponent } from '../shared/edit-animal/edit-animal.component';
 import { Genre } from 'src/app/models/enums/genre';
+import { ManageAnimalLinksComponent } from '../shared/manage-animal-links/manage-animal-links.component';
 
 @Component({
   selector: 'app-admin',
@@ -281,8 +282,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-
-
   openEditAnimalType(title: string, isAnimalTypeCreation : boolean, animalType: AnimalType): void {
     const dialogRefUser = this.dialogUser.open(EditAnimalTypeComponent, {
       disableClose: true,
@@ -327,5 +326,21 @@ export class AdminComponent implements OnInit {
         console.log('animal type vide');
       }
     });
+  }
+
+  manageAnimalsForUser(user: User) {
+    console.log('manage animals for user :', user.userName);
+    // TODO ouvre une modal avec deux liste d'animaux : ceux possédés par l'user et ceux sans maitre
+    // avec possibilité d'ajouter/enlever des animaux a l'user
+    const dialogRefUser = this.dialogUser.open(ManageAnimalLinksComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: {user: user}
+    });
+    dialogRefUser.afterClosed().subscribe(data => {
+      // TODO modifier
+      this.getUserList();
+    }
+    );
   }
 }
