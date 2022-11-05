@@ -19,6 +19,7 @@ import { AnimalServiceService } from './services/animal-service.service';
 import { ErrorModule } from './site/error/error.module';
 import { ErrorServiceService } from './services/error-service.service';
 import { AnimalTypeServiceService } from './services/animal-type-service.service';
+import { LinkUserAnimalService } from './services/link-user-animal.service';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { AnimalTypeServiceService } from './services/animal-type-service.service
     UserService,
     AnimalServiceService,
     AnimalTypeServiceService,
+    LinkUserAnimalService,
     ErrorServiceService
   ], // TODO verifier utilité
   bootstrap: [AppComponent]

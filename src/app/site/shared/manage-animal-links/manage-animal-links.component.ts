@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Animal } from 'src/app/models/animal';
@@ -7,7 +7,11 @@ import { RoleEnum } from 'src/app/models/enums/roleEnum';
 import { User } from 'src/app/models/user';
 import { AnimalServiceService } from 'src/app/services/animal-service.service';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
+import { LinkUserAnimalService } from 'src/app/services/link-user-animal.service';
 import { UserService } from 'src/app/services/user-service.service';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-manage-animal-links',
@@ -20,15 +24,22 @@ export class ManageAnimalLinksComponent implements OnInit {
 
   animalList: Animal[] = [];
   animalListFromUSer: Animal[] = [];
+
+  //animalListFromUSer = new MatTableDataSource<Animal>();
   animalListOrphans: Animal[] = [];
 
   userList: User[] = [];
 
   user!: User;
 
+  @ViewChild(MatTable) tableUser!: MatTable<Animal>;
+  @ViewChild(MatTable) tableOrphans!: MatTable<Animal>;
+
   constructor(
+
     private userService: UserService,
     private animalService: AnimalServiceService,
+    private linkUserAnimalService: LinkUserAnimalService,
     private errorService: ErrorServiceService,
     private router: Router,
     public dialogRef: MatDialogRef<ManageAnimalLinksComponent>,
@@ -128,11 +139,45 @@ export class ManageAnimalLinksComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  unlinkAnimal(animal: Animal): void {
+  linkAnimal(animal: Animal): void {
+    this.linkUserAnimalService.linkAnimalToUser(this.user.id, animal.id).subscribe(
+      data => {
+        //alert('Link ok');
+        let tempData = [...this.animalListFromUSer];
+        tempData.push(animal);
+        this.animalListFromUSer = tempData;
+       //this.animalListFromUSer.push(animal);
+        this.tableUser.renderRows();
 
+        this.animalListOrphans = this.animalListOrphans.filter(a => a.id !== animal.id);
+        this.tableOrphans.renderRows();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.dialogRef.close();
+        this.router.navigate(['error']);
+      }
+    );
   }
 
-  linkAnimal(animal: Animal): void {
+  unlinkAnimal(animal: Animal): void {
+    this.linkUserAnimalService.unlinkAnimalToUser(this.user.id, animal.id).subscribe(
+      data => {
+        //alert('Unlink ok');
+        let tempData = [...this.animalListOrphans];
+        tempData.push(animal);
+        this.animalListOrphans = tempData;
+        //this.animalListOrphans.push(animal);
+        this.tableOrphans.renderRows();
 
+        this.animalListFromUSer = this.animalListFromUSer.filter(a => a.id !== animal.id);
+        this.tableUser.renderRows();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.dialogRef.close();
+        this.router.navigate(['error']);
+      }
+    );
   }
 }

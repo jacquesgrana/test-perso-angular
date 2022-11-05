@@ -6,7 +6,7 @@
   <li *ngFor="let animal of this.animalListFromUSer">{{animal.name}}</li>
 </ul>
 -->
-<mat-table *ngIf="this.animalListFromUSer.length > 0" [dataSource]="this.animalListFromUSer" class="mat-elevation-z4">
+<mat-table *ngIf="this.animalListFromUSer.length > 0" #tableUser [dataSource]="this.animalListFromUSer" class="mat-elevation-z4">
   <ng-container matColumnDef="name">
     <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
@@ -42,7 +42,7 @@
 </ul>
 -->
 
-<mat-table *ngIf="this.animalListOrphans.length > 0" [dataSource]="this.animalListOrphans" class="mat-elevation-z4">
+<mat-table *ngIf="this.animalListOrphans.length > 0" #tableOrphans [dataSource]="this.animalListOrphans" class="mat-elevation-z4">
   <ng-container matColumnDef="name">
     <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
