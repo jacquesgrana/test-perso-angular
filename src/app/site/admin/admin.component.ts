@@ -52,6 +52,9 @@ export class AdminComponent implements OnInit {
     private animalTypeService: AnimalTypeServiceService,
     private errorService: ErrorServiceService,
     public dialogUser: MatDialog,
+    public dialogAnimal: MatDialog,
+    public dialogAnimalType: MatDialog,
+    public dialogAnimalLinks: MatDialog,
     public dialogConfirm: MatDialog
   ) {
   }
@@ -137,7 +140,7 @@ export class AdminComponent implements OnInit {
       }
       //this.dialogRef = null;
     });
-    
+
 /*
     if (window.confirm('Voulez-vous vraiment effacer l\'utilisateur ' + user.userName + '?')) {
 
@@ -292,7 +295,7 @@ export class AdminComponent implements OnInit {
   }
 
   openEditAnimal(title: string, isAnimalCreation: boolean, animal: Animal): void {
-    const dialogRefUser = this.dialogUser.open(EditAnimalComponent, {
+    const dialogRefUser = this.dialogAnimal.open(EditAnimalComponent, {
       disableClose: true,
       panelClass: ['dialog'],
       data: { title: title, isAnimalCreation: isAnimalCreation, animal: animal }
@@ -334,7 +337,7 @@ export class AdminComponent implements OnInit {
   }
 
   openEditAnimalType(title: string, isAnimalTypeCreation: boolean, animalType: AnimalType): void {
-    const dialogRefUser = this.dialogUser.open(EditAnimalTypeComponent, {
+    const dialogRefUser = this.dialogAnimalType.open(EditAnimalTypeComponent, {
       disableClose: true,
       panelClass: ['dialog'],
       data: { title: title, isAnimalTypeCreation: isAnimalTypeCreation, animalType: animalType }
@@ -383,7 +386,7 @@ export class AdminComponent implements OnInit {
     console.log('manage animals for user :', user.userName);
     // TODO ouvre une modal avec deux liste d'animaux : ceux possédés par l'user et ceux sans maitre
     // avec possibilité d'ajouter/enlever des animaux a l'user
-    const dialogRefUser = this.dialogUser.open(ManageAnimalLinksComponent, {
+    const dialogRefUser = this.dialogAnimalLinks.open(ManageAnimalLinksComponent, {
       disableClose: true,
       panelClass: ['dialog'],
       data: { user: user }
