@@ -1,76 +1,80 @@
 <h1 class="text-center" mat-dialog-title>Gérer la liste des Animaux de {{data.user.userName}}</h1>
 <div mat-dialog-content class="flex">
-<h3 *ngIf="this.animalListFromUSer.length > 0" class="text-center">Animaux possédés par {{data.user.userName}} :</h3>
-<!--
+  <h3 *ngIf="this.animalListFromUSer.length > 0" class="text-center">Animaux possédés par {{data.user.userName}} :</h3>
+  <!--
 <ul *ngIf="this.animalListFromUSer.length > 0">
   <li *ngFor="let animal of this.animalListFromUSer">{{animal.name}}</li>
 </ul>
 -->
-<mat-table *ngIf="this.animalListFromUSer.length > 0" #tableUser [dataSource]="this.animalListFromUSer" class="mat-elevation-z4">
-  <ng-container matColumnDef="name">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="type">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.animalType.label}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="genre">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
-  </ng-container>
+  <mat-table *ngIf="this.animalListFromUSer.length > 0" #tableUser [dataSource]="this.animalListFromUSer"
+    class="mat-elevation-z4">
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.animalType.label}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="genre">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn" (click)="unlinkAnimal(element)" class="">
-        <mat-icon>link_off</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="warn" (click)="unlinkAnimal(element)" class="">
+          <mat-icon>link_off</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
-</mat-table>
+    <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
+  </mat-table>
 
 
-<h3 *ngIf="this.animalListOrphans.length > 0" class="text-center">Animaux possédés par personne :</h3>
-<!--
+  <h3 *ngIf="this.animalListOrphans.length > 0" class="text-center">Animaux possédés par personne :</h3>
+  <!--
 <ul *ngIf="this.animalListOrphans.length > 0">
   <li *ngFor="let animal of this.animalListOrphans">{{animal.name}}</li>
 </ul>
 -->
 
-<mat-table *ngIf="this.animalListOrphans.length > 0" #tableOrphans [dataSource]="this.animalListOrphans" class="mat-elevation-z4">
-  <ng-container matColumnDef="name">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="type">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.animalType.label}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="genre">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
-  </ng-container>
+  <mat-table *ngIf="this.animalListOrphans.length > 0" #tableOrphans [dataSource]="this.animalListOrphans"
+    class="mat-elevation-z4">
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.animalType.label}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="genre">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="accent" (click)="linkAnimal(element)" class="">
-        <mat-icon>link_on</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="accent" (click)="linkAnimal(element)" class="">
+          <mat-icon>link_on</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
-</mat-table>
+    <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
+  </mat-table>
 </div>
 
-<div mat-dialog-actions class="flex-buttons" >
-  <button mat-flat-button color="warn" class="mb-2 button" (click)="onNoClick()"><mat-icon>close</mat-icon>Fermer</button>
+<div mat-dialog-actions class="flex-center mt-1">
+  <button mat-flat-button color="warn" class="mb-2 button" (click)="onNoClick()">
+    <mat-icon>close</mat-icon>Fermer
+  </button>
 </div>
