@@ -18,7 +18,7 @@
       </ng-container>
       <ng-container matColumnDef="role">
         <mat-header-cell mat-header-cell *matHeaderCellDef>Rôle</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.role.label}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{roleService.toString(element.role)}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="nb-animals">

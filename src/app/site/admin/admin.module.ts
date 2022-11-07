@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule} from '@angular/material/sort';
 import { MaterialModule } from 'src/app/material-module';
 import { SharedModule } from '../shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes =
@@ -27,6 +28,7 @@ const routes: Routes =
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
     MatTableModule,
     MatInputModule,
     MatPaginatorModule,

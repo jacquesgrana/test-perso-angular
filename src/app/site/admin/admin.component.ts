@@ -16,7 +16,9 @@ import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-
 import { EditAnimalComponent } from '../shared/edit-animal/edit-animal.component';
 import { Genre } from 'src/app/models/enums/genre';
 import { ManageAnimalLinksComponent } from '../shared/manage-animal-links/manage-animal-links.component';
-import { ConfirmationDialogComponent} from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { RoleServiceService } from 'src/app/services/role-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin',
@@ -51,11 +53,13 @@ export class AdminComponent implements OnInit {
     private animalService: AnimalServiceService,
     private animalTypeService: AnimalTypeServiceService,
     private errorService: ErrorServiceService,
+    public roleService: RoleServiceService,
     public dialogUser: MatDialog,
     public dialogAnimal: MatDialog,
     public dialogAnimalType: MatDialog,
     public dialogAnimalLinks: MatDialog,
-    public dialogConfirm: MatDialog
+    public dialogConfirm: MatDialog,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -125,11 +129,12 @@ export class AdminComponent implements OnInit {
     this.dialogRef.componentInstance.confirmMessage = 'Voulez-vous vraiment effacer l\'utilisateur ' + user.userName + '?';
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.userService.deleteUser(user.id).subscribe(
           (response) => {
             // TODO ajouter ouverture alert pour avertir que tout est ok
             console.log('delete request ok');
+            this.openSnackBar('Utilisateur ' + user.userName + ' supprimé.', 'Fermer', 2000);
             this.getUserList();
           },
           (error: HttpErrorResponse) => {
@@ -140,12 +145,6 @@ export class AdminComponent implements OnInit {
       }
       //this.dialogRef = null;
     });
-
-/*
-    if (window.confirm('Voulez-vous vraiment effacer l\'utilisateur ' + user.userName + '?')) {
-
-    }
-    */
   }
 
   addAnimal(): void {
@@ -177,11 +176,12 @@ export class AdminComponent implements OnInit {
     this.dialogRef.componentInstance.confirmMessage = 'Voulez-vous vraiment effacer l\'animal ' + animal.name + '?';
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.animalService.delete(animal.id).subscribe(
           (response) => {
             // TODO ajouter ouverture alert pour avertir que tout est ok
             console.log('delete animal request ok');
+            this.openSnackBar('Animal ' + animal.name + ' supprimé.', 'Fermer', 2000);
             this.getAnimalList();
           },
           (error: HttpErrorResponse) => {
@@ -192,11 +192,6 @@ export class AdminComponent implements OnInit {
       }
       //this.dialogRef = null;
     });
-
-    /*
-    if (window.confirm('Voulez-vous vraiment effacer l\'animal ' + animal.name + '?')) {
-
-    }*/
   }
 
   addAnimalType(): void {
@@ -219,29 +214,24 @@ export class AdminComponent implements OnInit {
     this.dialogRef.componentInstance.confirmMessage = 'Voulez-vous vraiment effacer le type d\'animal ' + animalType.label + '?';
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.animalTypeService.delete(animalType.id).subscribe(
-        (response) => {
-          console.log('delete animal type request ok');
-          this.getAnimalTypeList();
-        },
-        (error: HttpErrorResponse) => {
-          this.errorService.setError(error.statusText, error.message);
-          this.router.navigate(['error']);
-        }
-      );
+          (response) => {
+            console.log('delete animal type request ok');
+            this.openSnackBar('Type d\'animal ' + animalType.label + ' supprimé.', 'Fermer', 2000);
+            this.getAnimalTypeList();
+          },
+          (error: HttpErrorResponse) => {
+            this.errorService.setError(error.statusText, error.message);
+            this.router.navigate(['error']);
+          }
+        );
       }
       //this.dialogRef = null;
     });
-/*
-    if (window.confirm('Voulez-vous vraiment effacer le type d\'animal ' + animalType.label + '?')) {
-
-
-    }*/
   }
 
   /**
-   * TODO enlever booleen isNewPassword
    * @param title
    * @param isUserCreation
    * @param isNewPassword
@@ -257,17 +247,14 @@ export class AdminComponent implements OnInit {
       // TODO modifier
       if (data != undefined) {
         this.user = data.user;
-        //console.log('user modifié :', user);
-        //console.log('isUserCreation :', data.isUserCreation);
-        //console.log('isNewPassword :', data.isNewPassword);
-
         if (data.isUserCreation) {
           this.userService.createUser(this.user).subscribe(
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('post request ok');
+              this.openSnackBar('Utilisateur ' + this.user.userName + ' ajouté.', 'Fermer', 2000);
               this.getUserList();
-            }, // TODO améliorer affichage de l'erreur
+            },
             (error: HttpErrorResponse) => {
               this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
@@ -279,6 +266,7 @@ export class AdminComponent implements OnInit {
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request ok');
+              this.openSnackBar('Utilisateur ' + this.user.userName + ' mis à jour.', 'Fermer', 2000);
               this.getUserList();
             }, // TODO améliorer affichage de l'erreur
             (error: HttpErrorResponse) => {
@@ -308,6 +296,7 @@ export class AdminComponent implements OnInit {
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('post request animal ok');
+              this.openSnackBar('Animal ' + this.animal.name + ' ajouté.', 'Fermer', 2000);
               this.getAnimalList();
             },
             (error: HttpErrorResponse) => {
@@ -321,6 +310,7 @@ export class AdminComponent implements OnInit {
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request animal ok');
+              this.openSnackBar('Animal ' + this.animal.name + ' mis à jour.', 'Fermer', 2000);
               this.getAnimalList();
             },
             (error: HttpErrorResponse) => {
@@ -354,8 +344,9 @@ export class AdminComponent implements OnInit {
           this.animalTypeService.add(this.animalType).subscribe(
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
+              this.openSnackBar('Type d\'animal ' + this.animalType.label + ' ajouté.', 'Fermer', 2000);
               this.getAnimalTypeList();
-            }, // TODO améliorer affichage de l'erreur
+            },
             (error: HttpErrorResponse) => {
               this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
@@ -367,8 +358,9 @@ export class AdminComponent implements OnInit {
             (response) => {
               // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request animal type ok');
+              this.openSnackBar('Type d\'animal ' + this.animalType.label + ' mis à jour.', 'Fermer', 2000);
               this.getAnimalTypeList();
-            }, // TODO améliorer affichage de l'erreur
+            },
             (error: HttpErrorResponse) => {
               this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
@@ -384,8 +376,6 @@ export class AdminComponent implements OnInit {
 
   manageAnimalsForUser(user: User) {
     console.log('manage animals for user :', user.userName);
-    // TODO ouvre une modal avec deux liste d'animaux : ceux possédés par l'user et ceux sans maitre
-    // avec possibilité d'ajouter/enlever des animaux a l'user
     const dialogRefUser = this.dialogAnimalLinks.open(ManageAnimalLinksComponent, {
       disableClose: true,
       panelClass: ['dialog'],
@@ -395,6 +385,20 @@ export class AdminComponent implements OnInit {
       // TODO modifier
       this.getUserList();
     }
+    );
+  }
+
+  openSnackBar(message: string, action: string, duration: number) {
+    this.snackBar.open(
+      message,
+      action,
+      {
+        duration: duration,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['snackbar']
+      }
+
     );
   }
 }

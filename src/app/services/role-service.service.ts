@@ -19,13 +19,13 @@ export class RoleServiceService {
     let toReturn = '';
     switch (role.label) {
       case RoleEnum.ROLE_ADMIN:
-        toReturn = 'Admin';
+        toReturn = 'Administrateur';
         break;
       case RoleEnum.ROLE_MANAGER:
         toReturn = 'Manager';
         break;
       case RoleEnum.ROLE_USER:
-        toReturn = 'User';
+        toReturn = 'Utilisateur';
         break;
     }
     return toReturn;

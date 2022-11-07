@@ -33,6 +33,17 @@ mat-cell {
   flex: 0 0 10%;
 }
 .mat-column-actions {
-  flex: 0 0 20%;
+  flex: 0 0 12%;
   flex-wrap: wrap;
+}
+
+::ng-deep snack-bar-container.snackbar {
+  background-color: $components-foreground-color !important;
+  color: $components-background-light-color !important;
+  outline: 1px solid $components-background-light-color !important;
+  border-radius: 5px !important;
+}
+
+::ng-deep snack-bar-container.snackbar .mat-simple-snackbar-action {
+  color: $components-background-color-accent !important;
 }
