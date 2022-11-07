@@ -12,7 +12,7 @@ import { HeaderModule } from './site/header/header.module';
 import { FooterModule } from './site/footer/footer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './site/shared/shared.module';
 import { UserService } from './services/user-service.service';
 import { AnimalServiceService } from './services/animal-service.service';
@@ -22,13 +22,15 @@ import { AnimalTypeServiceService } from './services/animal-type-service.service
 import { LinkUserAnimalService } from './services/link-user-animal.service';
 
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     LoginModule,

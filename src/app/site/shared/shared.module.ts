@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditAnimalComponent } from './edit-animal/edit-animal.component';
 import { ManageAnimalLinksComponent } from './manage-animal-links/manage-animal-links.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -14,7 +15,8 @@ import { ManageAnimalLinksComponent } from './manage-animal-links/manage-animal-
     EditUserComponent,
     EditAnimalTypeComponent,
     EditAnimalComponent,
-    ManageAnimalLinksComponent
+    ManageAnimalLinksComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ManageAnimalLinksComponent } from './manage-animal-links/manage-animal-
   ],
   exports: [
     EditUserComponent,
-    EditAnimalTypeComponent
-  ]
+    EditAnimalTypeComponent,
+  ],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class SharedModule { }

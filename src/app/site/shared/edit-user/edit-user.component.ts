@@ -54,16 +54,10 @@ export class EditUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  /*
+/*
   onValidate(): void {
-
-    if (this.initialPassword != this.data.user.password) {
-      this.data.isNewPassword = true;
-    }
-    else {
-      this.data.isNewPassword = false;
-    }
-  }*/
+  }
+*/
 
   ngOnInit(): void {
     this.initialData = { ...this.data};
