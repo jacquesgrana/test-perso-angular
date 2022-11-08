@@ -1,15 +1,15 @@
 <h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content class="flex">
-  <mat-form-field class="" appearance="outline">
+  <mat-form-field *ngIf="roleService.toString(userService.user.role) == 'Administrateur'" class="" appearance="outline">
     <mat-label for="id" class="">Id</mat-label>
     <input matInput name="id" type="text" [(ngModel)]="data.animalType.id" disabled="true" class="">
   </mat-form-field>
   <mat-form-field class="" appearance="outline">
     <mat-label for="label" class="">Label</mat-label>
-    <input matInput name="label" type="text" [(ngModel)]="data.animalType.label" class="">
+    <input matInput name="label" type="text" [(ngModel)]="data.animalType.label" class="" [disabled]="roleService.toString(userService.user.role) !== 'Administrateur'">
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="flex-center mt-1" >
   <button mat-flat-button color="warn" class="mb-2 button" (click)="onNoClick()"><mat-icon>close</mat-icon>Fermer</button>
-  <button mat-flat-button color="primary" class="mb-2 button" [mat-dialog-close]="data" cdkFocusInitial><mat-icon>check</mat-icon>Valider</button>
+  <button *ngIf="roleService.toString(userService.user.role) == 'Administrateur'" mat-flat-button color="primary" class="mb-2 button" [mat-dialog-close]="data" cdkFocusInitial><mat-icon>check</mat-icon>Valider</button>
 </div>

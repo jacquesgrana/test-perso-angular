@@ -11,6 +11,8 @@ import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.s
 import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { RoleServiceService } from 'src/app/services/role-service.service';
 import { UserService } from 'src/app/services/user-service.service';
+import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-type.component';
+import { EditAnimalComponent } from '../shared/edit-animal/edit-animal.component';
 import { EditUserComponent } from '../shared/edit-user/edit-user.component';
 
 @Component({
@@ -23,9 +25,9 @@ export class ManagerComponent implements OnInit {
   userList !: User[];
   animalList !: Animal[];
   animalTypeList !: AnimalType[];
-  displayedUsersColumns: string[] = ['id', 'name', 'role', 'nb-animals', 'actions'];
-  displayedAnimalsColumns: string[] = ['id', 'name', 'type', 'genre', 'birth', 'actions'];
-  displayedAnimalTypesColumns: string[] = ['id', 'label', 'actions'];
+  displayedUsersColumns: string[] = ['name', 'role', 'nb-animals', 'actions'];
+  displayedAnimalsColumns: string[] = ['name', 'type', 'genre', 'birth', 'actions'];
+  displayedAnimalTypesColumns: string[] = ['label', 'actions'];
 
   user!: User;
   animal !: Animal;
@@ -43,8 +45,7 @@ export class ManagerComponent implements OnInit {
     public dialogAnimal: MatDialog,
     public dialogAnimalType: MatDialog,
     public dialogAnimalLinks: MatDialog,
-    public dialogConfirm: MatDialog,
-    private snackBar: MatSnackBar
+    public dialogConfirm: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -93,11 +94,35 @@ export class ManagerComponent implements OnInit {
     this.openEditUser('Editer User', false, user);
   }
 
+  editAnimal(animal: Animal) {
+    this.openEditAnimal('Editer un animal', false, animal);
+  }
+
+  editAnimalType(animalType: AnimalType) {
+    this.openEditAnimalType('Editer un Type d\'animaux', false, animalType);
+  }
+
   openEditUser(title: string, isUserCreation: boolean, user: User): void {
     const dialogRefUser = this.dialogUser.open(EditUserComponent, {
       disableClose: true,
       panelClass: ['dialog'],
       data: { title: title, isUserCreation: isUserCreation, user: user }
+    });
+  }
+
+  openEditAnimal(title: string, isAnimalCreation: boolean, animal: Animal): void {
+    const dialogRefUser = this.dialogAnimal.open(EditAnimalComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: { title: title, isAnimalCreation: isAnimalCreation, animal: animal }
+    });
+  }
+
+  openEditAnimalType(title: string, isAnimalTypeCreation: boolean, animalType: AnimalType): void {
+    const dialogRefUser = this.dialogAnimalType.open(EditAnimalTypeComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: { title: title, isAnimalTypeCreation: isAnimalTypeCreation, animalType: animalType }
     });
   }
 

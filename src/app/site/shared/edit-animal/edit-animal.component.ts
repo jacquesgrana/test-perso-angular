@@ -7,6 +7,8 @@ import { AnimalTypeServiceService } from 'src/app/services/animal-type-service.s
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service.service';
+import { RoleServiceService } from 'src/app/services/role-service.service';
 
 @Component({
   selector: 'app-edit-animal',
@@ -31,6 +33,8 @@ export class EditAnimalComponent implements OnInit {
   constructor(
     public animalTypeService : AnimalTypeServiceService,
     public dialogRef: MatDialogRef<EditAnimalComponent>,
+    public userService : UserService,
+    public roleService: RoleServiceService,
     private errorService: ErrorServiceService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: {

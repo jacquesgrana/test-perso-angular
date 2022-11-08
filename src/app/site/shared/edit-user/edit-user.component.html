@@ -1,7 +1,7 @@
 
 <h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content class="flex">
-  <mat-form-field class="" appearance="outline">
+  <mat-form-field *ngIf="roleService.toString(userService.user.role) == 'Administrateur'" class="" appearance="outline">
     <mat-label for="id" class="">Id</mat-label>
     <input matInput name="id" type="text" [(ngModel)]="data.user.id" disabled="true" class="">
   </mat-form-field>
