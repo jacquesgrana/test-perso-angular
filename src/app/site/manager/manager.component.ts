@@ -99,7 +99,7 @@ export class ManagerComponent implements OnInit {
   }
 
   editAnimalType(animalType: AnimalType) {
-    this.openEditAnimalType('Editer un Type d\'animaux', false, animalType);
+    this.openEditAnimalType('Editer un Type d\'animal', false, animalType);
   }
 
   openEditUser(title: string, isUserCreation: boolean, user: User): void {

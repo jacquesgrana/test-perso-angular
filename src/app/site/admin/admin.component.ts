@@ -182,11 +182,11 @@ export class AdminComponent implements OnInit {
 
   addAnimalType(): void {
     const animalType = new AnimalType(-1, '');
-    this.openEditAnimalType('Ajouter un Type d\'animaux', true, animalType);
+    this.openEditAnimalType('Ajouter un Type d\'animal', true, animalType);
   }
 
   editAnimalType(animalType: AnimalType) {
-    this.openEditAnimalType('Editer un Type d\'animaux', false, animalType);
+    this.openEditAnimalType('Editer un Type d\'animal', false, animalType);
   }
 
   deleteAnimalType(animalType: AnimalType) {
@@ -199,7 +199,6 @@ export class AdminComponent implements OnInit {
       if (result) {
         this.animalTypeService.delete(animalType.id).subscribe(
           (response) => {
-            console.log('delete animal type request ok');
             this.openSnackBar('Type d\'animal ' + animalType.label + ' supprimé.', 'Fermer', 2000);
             this.getAnimalTypeList();
           },
