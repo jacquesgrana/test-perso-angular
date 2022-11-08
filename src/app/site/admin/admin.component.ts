@@ -27,13 +27,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AdminComponent implements OnInit {
 
-  userList !: User[]; // TODO changer type : User ou UserDto (à créer)
+  userList !: User[];
   animalList !: Animal[];
   animalTypeList !: AnimalType[];
-  displayedColumns: string[] = ['id', 'name', 'role', 'nb-animals', 'actions']; //, 'nb-animals'
+  displayedUsersColumns: string[] = ['id', 'name', 'role', 'nb-animals', 'actions']; //, 'nb-animals'
   displayedAnimalsColumns: string[] = ['id', 'name', 'type', 'genre', 'birth', 'actions'];
   displayedAnimalTypesColumns: string[] = ['id', 'label', 'actions'];
-  //isEditUserDivOpen: boolean = false;
 
 
   // TODO pour tester :
@@ -82,7 +81,7 @@ export class AdminComponent implements OnInit {
   }
 
   getAnimalList(): void {
-    this.animalService.getAll().subscribe( // .getAnimalList()
+    this.animalService.getAll().subscribe(
       data => {
         this.animalList = data;
       },
@@ -97,7 +96,6 @@ export class AdminComponent implements OnInit {
     this.animalTypeService.getAll().subscribe(
       data => {
         this.animalTypeList = data;
-        //console.log('animal type list :', this.animalTypeList);
       },
       (error: HttpErrorResponse) => {
         this.errorService.setError(error.statusText, error.message);
@@ -107,27 +105,19 @@ export class AdminComponent implements OnInit {
   }
 
   addUser(): void {
-    console.log('add user');
-    //this.isEditUserDivOpen = !this.isEditUserDivOpen;
     const user = new User(-1, '', '', new Role(3, RoleEnum.ROLE_USER), '', []);
     this.openEditUser('Ajouter User', true, user);
   }
 
   editUser(user: User) {
-    console.log('edit user : ' + user.userName);
-    //this.isEditUserDivOpen = !this.isEditUserDivOpen;
     this.openEditUser('Editer User', false, user);
   }
 
   deleteUser(user: User) {
-    // TODO ajouter ouverture alert pour demander confirmation
-    console.log('delete user : ' + user.userName);
-
     this.dialogRef = this.dialogConfirm.open(ConfirmationDialogComponent, {
       disableClose: true
     });
     this.dialogRef.componentInstance.confirmMessage = 'Voulez-vous vraiment effacer l\'utilisateur ' + user.userName + '?';
-
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.deleteUser(user.id).subscribe(
@@ -148,7 +138,6 @@ export class AdminComponent implements OnInit {
   }
 
   addAnimal(): void {
-    console.log('add animal');
     const animalType: AnimalType = new AnimalType(1, 'Chat');
     const birth: Date = new Date('1999-12-31');
     const animal = new Animal(
@@ -163,13 +152,10 @@ export class AdminComponent implements OnInit {
   }
 
   editAnimal(animal: Animal) {
-    console.log('edit animal : ' + animal.name);
     this.openEditAnimal('Editer un animal', false, animal);
   }
 
   deleteAnimal(animal: Animal) {
-    console.log('delete animal : ' + animal.name);
-
     this.dialogRef = this.dialogConfirm.open(ConfirmationDialogComponent, {
       disableClose: true
     });
@@ -195,19 +181,15 @@ export class AdminComponent implements OnInit {
   }
 
   addAnimalType(): void {
-    console.log('add animal type');
     const animalType = new AnimalType(-1, '');
     this.openEditAnimalType('Ajouter un Type d\'animaux', true, animalType);
   }
 
   editAnimalType(animalType: AnimalType) {
-    console.log('edit animal type : ' + animalType.label);
     this.openEditAnimalType('Editer un Type d\'animaux', false, animalType);
   }
 
   deleteAnimalType(animalType: AnimalType) {
-    console.log('delete animal type : ' + animalType.label);
-
     this.dialogRef = this.dialogConfirm.open(ConfirmationDialogComponent, {
       disableClose: true
     });
@@ -244,13 +226,11 @@ export class AdminComponent implements OnInit {
       data: { title: title, isUserCreation: isUserCreation, user: user }
     });
     dialogRefUser.afterClosed().subscribe(data => {
-      // TODO modifier
       if (data != undefined) {
         this.user = data.user;
         if (data.isUserCreation) {
           this.userService.createUser(this.user).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('post request ok');
               this.openSnackBar('Utilisateur ' + this.user.userName + ' ajouté.', 'Fermer', 2000);
               this.getUserList();
@@ -264,11 +244,10 @@ export class AdminComponent implements OnInit {
         else {
           this.userService.updateUser(this.user).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
               console.log('put request ok');
               this.openSnackBar('Utilisateur ' + this.user.userName + ' mis à jour.', 'Fermer', 2000);
               this.getUserList();
-            }, // TODO améliorer affichage de l'erreur
+            },
             (error: HttpErrorResponse) => {
               this.errorService.setError(error.statusText, error.message);
               this.router.navigate(['error']);
@@ -294,8 +273,6 @@ export class AdminComponent implements OnInit {
         if (data.isAnimalCreation) {
           this.animalService.add(this.animal).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
-              console.log('post request animal ok');
               this.openSnackBar('Animal ' + this.animal.name + ' ajouté.', 'Fermer', 2000);
               this.getAnimalList();
             },
@@ -308,8 +285,6 @@ export class AdminComponent implements OnInit {
         else {
           this.animalService.update(this.animal).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
-              console.log('put request animal ok');
               this.openSnackBar('Animal ' + this.animal.name + ' mis à jour.', 'Fermer', 2000);
               this.getAnimalList();
             },
@@ -333,17 +308,12 @@ export class AdminComponent implements OnInit {
       data: { title: title, isAnimalTypeCreation: isAnimalTypeCreation, animalType: animalType }
     });
     dialogRefUser.afterClosed().subscribe(data => {
-      // TODO modifier
       if (data != undefined) {
         this.animalType = data.animalType;
-        //console.log('user modifié :', user);
-        //console.log('isUserCreation :', data.isUserCreation);
-        //console.log('isNewPassword :', data.isNewPassword);
 
         if (data.isAnimalTypeCreation) {
           this.animalTypeService.add(this.animalType).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
               this.openSnackBar('Type d\'animal ' + this.animalType.label + ' ajouté.', 'Fermer', 2000);
               this.getAnimalTypeList();
             },
@@ -356,8 +326,6 @@ export class AdminComponent implements OnInit {
         else {
           this.animalTypeService.update(this.animalType).subscribe(
             (response) => {
-              // TODO ajouter ouverture alert pour avertir que tout est ok
-              console.log('put request animal type ok');
               this.openSnackBar('Type d\'animal ' + this.animalType.label + ' mis à jour.', 'Fermer', 2000);
               this.getAnimalTypeList();
             },
@@ -382,7 +350,6 @@ export class AdminComponent implements OnInit {
       data: { user: user }
     });
     dialogRefUser.afterClosed().subscribe(data => {
-      // TODO modifier
       this.getUserList();
     }
     );

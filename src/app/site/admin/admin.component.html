@@ -1,6 +1,6 @@
 <div class="body-container">
   <div class="">
-    <h2 class="text-center mb-5">Page Admin</h2>
+    <h2 class="text-center mb-5">Page Administrateur</h2>
   </div>
   <div class="">
     <h3 class="text-center mb-3">Liste des Users</h3>
@@ -42,24 +42,14 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedUsersColumns"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedUsersColumns"></mat-row>
     </mat-table>
   </div>
-<!--
-  <div *ngIf="isEditUserDivOpen">
-    <app-edit-user></app-edit-user>
-  </div>
--->
   <div class="flex-center mt-4 mb-2">
     <button mat-raised-button class=" mat-elevation-z2" color="primary" (click)="addUser()"><mat-icon>add</mat-icon>Ajouter User</button>
   </div>
-  <!--
-  <div class="flex-center mt-4 mb-2">
-    <button mat-raised-button class=" mat-elevation-z2" color="primary" routerLink="/user"><mat-icon>add</mat-icon>Test</button>
-  </div>
-  -->
 
   <div class="">
     <h3 class="text-center mt-5 mb-3">Liste des Animaux</h3>

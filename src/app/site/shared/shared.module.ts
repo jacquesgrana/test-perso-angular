@@ -26,8 +26,10 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
   ],
   exports: [
     EditUserComponent,
-    EditAnimalTypeComponent,
+    EditAnimalTypeComponent
   ],
-  entryComponents: [ConfirmationDialogComponent]
+  entryComponents: [
+    ConfirmationDialogComponent
+  ]
 })
 export class SharedModule { }

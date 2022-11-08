@@ -1,2 +1,49 @@
 @import "src/library";
 @import "src/theme";
+
+.body-container {
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+  flex-grow: 1;
+  color: $components-foreground-color !important;
+}
+
+mat-table {
+  width: 80%;
+  background-color: $components-background-color-bis !important;
+  color: $components-foreground-color !important;
+  outline: 1px solid $components-foreground-color !important;
+  border-radius: 20px !important;
+  overflow:hidden !important;
+}
+
+mat-header-cell,
+mat-cell {
+  color: $components-foreground-color !important;
+  min-height: 60px !important;
+}
+
+::ng-deep .dialog, .dialog {
+  display: flex !important;
+  justify-content:flex-start !important;
+  flex-direction: column !important;
+}
+
+.mat-column-id {
+  flex: 0 0 10%;
+}
+.mat-column-actions {
+  flex: 0 0 12%;
+  flex-wrap: wrap;
+}
+
+::ng-deep snack-bar-container.snackbar {
+  background-color: $components-foreground-color !important;
+  color: $components-background-light-color !important;
+  outline: 1px solid $components-background-light-color !important;
+  border-radius: 5px !important;
+}
+
+::ng-deep snack-bar-container.snackbar .mat-simple-snackbar-action {
+  color: $compenents-foreground-warn-color !important;
+}

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/material-module';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes =
@@ -19,6 +20,7 @@ const routes: Routes =
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    MaterialModule,
     SharedModule,
     RouterModule.forChild(routes)
   ]

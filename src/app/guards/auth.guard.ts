@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { RoleEnum } from '../models/enums/roleEnum';
 import { UserService } from '../services/user-service.service';
 
 
@@ -34,38 +35,38 @@ export class AuthGuard implements CanActivate {
       //const role = this.userService.getRole();
       //console.log('guard : route :', route.toString());
 
-      const role = this.userService.user.role.toString();
-      console.log('guard : role :', role);
-      switch (role) {
-        case 'ROLE_ADMIN':
+      const roleLabel = this.userService.user.role.label;
+      //console.log('guard : role :', role);
+      switch (roleLabel) {
+        case RoleEnum.ROLE_ADMIN:
           if (route.url.toString() == 'admin') {
-            console.log('guard : admin sur la bonne page');
+            //console.log('guard : admin sur la bonne page');
             return true;
           }
           else {
-            console.log('guard : admin sur la mauvaise page');
+            //console.log('guard : admin sur la mauvaise page');
             this.router.navigate(['admin']);
             return false;
           }
           break;
-        case 'ROLE_MANAGER':
+        case RoleEnum.ROLE_MANAGER:
           if (route.url.toString() == 'manager') {
-            console.log('guard : manager sur la bonne page');
+            //console.log('guard : manager sur la bonne page');
             return true;
           }
           else {
-            console.log('guard : manager sur la mauvaise page');
+            //console.log('guard : manager sur la mauvaise page');
             this.router.navigate(['manager']);
             return false;
           }
           break;
-        case 'ROLE_USER':
+        case RoleEnum.ROLE_USER:
           if (route.url.toString() == 'user') {
-            console.log('guard : user sur la bonne page');
+            //console.log('guard : user sur la bonne page');
             return true;
           }
           else {
-            console.log('guard : user sur la mauvaise page');
+            //console.log('guard : user sur la mauvaise page');
             this.router.navigate(['user']);
             return false;
           }
@@ -74,8 +75,7 @@ export class AuthGuard implements CanActivate {
 
     }
     else {
-      console.log('guard : non loggé');
-
+      //console.log('guard : non loggé');
       this.router.navigate(['login']);
       return false;
     }

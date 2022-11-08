@@ -84,15 +84,19 @@ export class UserService {
     let resp = this.http.get<any>(URL_GET_ROLE_BY_USERNAME + "/" + this.user.userName, { observe: 'response', headers: headers }).subscribe(
       (response) => {
         const extractedRole = response.body.label;
-        this.user.role = extractedRole;
+        //this.user.role = extractedRole;
+
         switch (extractedRole) {
           case 'ROLE_ADMIN':
+            this.user.role = new Role(1, RoleEnum.ROLE_ADMIN);
             this.router.navigate(['admin']);
             break;
           case 'ROLE_MANAGER':
+            this.user.role = new Role(2, RoleEnum.ROLE_MANAGER);
             this.router.navigate(['manager']);
             break;
           case 'ROLE_USER':
+            this.user.role = new Role(3, RoleEnum.ROLE_USER);
             this.router.navigate(['user']);
             break;
         }

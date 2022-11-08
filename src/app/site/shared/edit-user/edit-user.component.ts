@@ -4,6 +4,7 @@ import { RoleEnum } from 'src/app/models/enums/roleEnum';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { RoleServiceService } from 'src/app/services/role-service.service';
+import { UserService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -29,6 +30,7 @@ export class EditUserComponent implements OnInit {
   constructor(
     public roleService: RoleServiceService,
     public dialogRef: MatDialogRef<EditUserComponent>,
+    public userService : UserService,
     @Inject(MAT_DIALOG_DATA) public data: {
       title: '',
       isUserCreation: boolean,
