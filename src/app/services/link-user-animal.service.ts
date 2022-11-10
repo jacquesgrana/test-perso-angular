@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user-service.service';
-import { ErrorServiceService } from './error-service.service';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 
@@ -19,8 +17,6 @@ export class LinkUserAnimalService {
   constructor(
     protected http: HttpClient,
     private userService: UserService,
-    private errorService: ErrorServiceService,
-    private router: Router
   ) {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -33,6 +29,7 @@ export class LinkUserAnimalService {
       idUser: idUser,
       idAnimal: idAnimal
     }
+    console.log('link - dto :', dto);
     return this.http.post<any>(this.URL_LINK, dto, {'headers': this.headers});
   }
 

@@ -46,6 +46,7 @@ export class ManageAnimalLinksComponent implements OnInit {
     private errorService: ErrorServiceService,
     private router: Router,
     public dialogRef: MatDialogRef<ManageAnimalLinksComponent>,
+    // TODO modifier les datas
     @Inject(MAT_DIALOG_DATA) public data: {
       user: {
         id: 0,

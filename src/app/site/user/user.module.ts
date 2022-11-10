@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/material-module';
 
 const routes: Routes =
 [
@@ -18,6 +19,7 @@ const routes: Routes =
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    MaterialModule,
     RouterModule.forChild(routes)
   ]
 })

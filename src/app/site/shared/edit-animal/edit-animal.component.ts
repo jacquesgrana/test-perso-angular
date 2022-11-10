@@ -9,6 +9,7 @@ import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service.service';
 import { RoleServiceService } from 'src/app/services/role-service.service';
+import { RoleEnum } from 'src/app/models/enums/roleEnum';
 
 @Component({
   selector: 'app-edit-animal',
@@ -25,6 +26,8 @@ export class EditAnimalComponent implements OnInit {
   initialComment!: string;
   initialGenre!: Genre;
   initialBirth!: Date;
+
+  isRoleAuthorized: boolean = false;
 
   animalTypeList: AnimalType[] = [];
 
@@ -63,6 +66,8 @@ export class EditAnimalComponent implements OnInit {
     this.initialGenre = this.initialData.animal.genre;
     this.initialBirth = this.initialData.animal.birth;
     this.getAnimalTypeList();
+
+    this.isRoleAuthorized = this.userService.user.role.label == RoleEnum.ROLE_ADMIN || this.userService.user.role.label == RoleEnum.ROLE_USER;
   }
 
   onNoClick(): void {
