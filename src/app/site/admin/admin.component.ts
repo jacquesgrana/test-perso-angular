@@ -122,8 +122,7 @@ export class AdminComponent implements OnInit {
       if (result) {
         this.userService.deleteUser(user.id).subscribe(
           (response) => {
-            // TODO ajouter ouverture alert pour avertir que tout est ok
-            console.log('delete request ok');
+            //console.log('delete request ok');
             this.openSnackBar('Utilisateur ' + user.userName + ' supprimé.', 'Fermer', 2000);
             this.getUserList();
           },
@@ -165,8 +164,7 @@ export class AdminComponent implements OnInit {
       if (result) {
         this.animalService.delete(animal.id).subscribe(
           (response) => {
-            // TODO ajouter ouverture alert pour avertir que tout est ok
-            console.log('delete animal request ok');
+            //console.log('delete animal request ok');
             this.openSnackBar('Animal ' + animal.name + ' supprimé.', 'Fermer', 2000);
             this.getAnimalList();
           },
@@ -230,7 +228,7 @@ export class AdminComponent implements OnInit {
         if (data.isUserCreation) {
           this.userService.createUser(this.user).subscribe(
             (response) => {
-              console.log('post request ok');
+              //console.log('post request ok');
               this.openSnackBar('Utilisateur ' + this.user.userName + ' ajouté.', 'Fermer', 2000);
               this.getUserList();
             },
@@ -243,7 +241,7 @@ export class AdminComponent implements OnInit {
         else {
           this.userService.updateUser(this.user).subscribe(
             (response) => {
-              console.log('put request ok');
+              //console.log('put request ok');
               this.openSnackBar('Utilisateur ' + this.user.userName + ' mis à jour.', 'Fermer', 2000);
               this.getUserList();
             },
@@ -342,7 +340,7 @@ export class AdminComponent implements OnInit {
   }
 
   manageAnimalsForUser(user: User) {
-    console.log('manage animals for user :', user.userName);
+    //console.log('manage animals for user :', user.userName);
     const dialogRefUser = this.dialogAnimalLinks.open(ManageAnimalLinksComponent, {
       disableClose: true,
       panelClass: ['dialog'],

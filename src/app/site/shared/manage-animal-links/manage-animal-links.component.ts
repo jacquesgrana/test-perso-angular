@@ -10,6 +10,7 @@ import { ErrorServiceService } from 'src/app/services/error-service.service';
 import { LinkUserAnimalService } from 'src/app/services/link-user-animal.service';
 import { UserService } from 'src/app/services/user-service.service';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { RoleServiceService } from 'src/app/services/role-service.service';
 
 
 
@@ -21,6 +22,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 export class ManageAnimalLinksComponent implements OnInit {
 
   displayedAnimalsColumns: string[] = ['name', 'type', 'genre', 'actions'];
+  displayedAnimalsColumnsManager: string[] = ['name', 'type', 'genre'];
 
   animalList: Animal[] = [];
   animalListFromUSer: Animal[] = [];
@@ -37,7 +39,8 @@ export class ManageAnimalLinksComponent implements OnInit {
 
   constructor(
 
-    private userService: UserService,
+    public userService : UserService,
+    public roleService: RoleServiceService,
     private animalService: AnimalServiceService,
     private linkUserAnimalService: LinkUserAnimalService,
     private errorService: ErrorServiceService,
@@ -57,24 +60,15 @@ export class ManageAnimalLinksComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.data.user;
-    this.getUserList();
     this.getAnimalListFromUser();
+    //console.log('on init manage animal link, token :', this.user.token);
+    //console.log('on init manage animal link, user :', this.user);
+
+
+    this.getAnimalListOrphans();
 
   }
-
-  getAnimalList(): void {
-    this.animalService.getAll().subscribe( // .getAnimalList()
-      data => {
-        this.animalList = data;
-        this.getAnimalListOrphans();
-      },
-      (error: HttpErrorResponse) => {
-        this.errorService.setError(error.statusText, error.message);
-        this.router.navigate(['error']);
-      }
-    );
-  }
-
+/*
   getUserList(): void {
     this.userService.getUserList().subscribe(
       data => {
@@ -88,6 +82,21 @@ export class ManageAnimalLinksComponent implements OnInit {
     );
   }
 
+  getAnimalList(): void {
+    this.animalService.getAll().subscribe( // .getAnimalList()
+      data => {
+        this.animalList = data;
+        this.getAnimalListOrphans();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
+      }
+    );
+  }*/
+
+
+
   getAnimalListFromUser(): void {
     if (this.user.animals.length > 0) {
       this.animalListFromUSer = this.user.animals;
@@ -95,24 +104,16 @@ export class ManageAnimalLinksComponent implements OnInit {
   }
 
   getAnimalListOrphans(): void {
+/*
     let animalListPossessed: Set<Animal> = new Set<Animal>();
     this.userList.forEach(u => {
       if (u.animals.length > 0) {
-        //console.log('ajout des animaux de :', u.userName);
-
         u.animals.forEach(a => {
           animalListPossessed.add(a);
-          //console.log('ajout de :', a.name);
         });
       }
     });
-    //console.log('animaux possédés :', animalListPossessed);
     const animalTempListPossessed: Animal[] = Array.from(animalListPossessed);
-    //console.log('liste totale des animaux :', this.animalList);
-
-    //let animalSetOrphans: Set<Animal> = new Set<Animal>();
-
-    //this.animalListOrphans = this.animalList.filter(a => !animalTempListPossessed.includes(a));
     for (let animalAll of this.animalList) {
       let isOut = true;
       for (let animalPoss of animalTempListPossessed) {
@@ -127,11 +128,18 @@ export class ManageAnimalLinksComponent implements OnInit {
       if (isOut) {
         this.animalListOrphans.push(animalAll);
       }
-    }
+    }*/
 
-    //this.animalListOrphans = Array.from(animalSetOrphans);
-    //console.log('animaux orphelins : ', this.animalListOrphans);
 
+    this.animalService.getOrphansAnimals().subscribe(
+      (response) => {
+        this.animalListOrphans = response as Animal[];
+      },
+      (error: HttpErrorResponse) => {
+        this.errorService.setError(error.statusText, error.message);
+        this.router.navigate(['error']);
+      }
+    );
   }
 
 

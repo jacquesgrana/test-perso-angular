@@ -27,7 +27,7 @@
       <ng-container matColumnDef="actions" class="">
         <mat-header-cell mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="accent"  class="ms-2 me-2"> <!-- (click)="manageAnimalsForUser(element)" -->
+          <button mat-mini-fab color="accent" (click)="manageAnimalsForUser(element)" class="ms-2 me-2"> <!-- (click)="manageAnimalsForUser(element)" -->
             <mat-icon>pets</mat-icon>
           </button>
 

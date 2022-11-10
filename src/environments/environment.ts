@@ -14,7 +14,8 @@ export const environment = {
   URL_GET_LIST: "/all",
   URL_CREATE: "/create",
   URL_UPDATE: "/update",
-  URL_DELETE: "/delete"
+  URL_DELETE: "/delete",
+  URL_ORPHANS: "/orphans"
 };
 
 /*

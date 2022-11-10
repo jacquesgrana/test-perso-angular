@@ -12,6 +12,7 @@ import { ErrorServiceService } from './error-service.service';
 
 const URL_SIGNIN = environment.URL_API + "/signin";
 const URL_GET_ROLE_BY_USERNAME = environment.URL_API + "/user/role";
+const URL_GET_USER_BY_USERNAME = environment.URL_API + "/user/username";
 const URL_GET_USER_LIST = environment.URL_API + '/user/all';
 const URL_CREATE_USER = environment.URL_API + '/admin/create';
 const URL_UPDATE_USER = environment.URL_API + '/admin/update';
@@ -26,6 +27,8 @@ export class UserService {
   userList : any[] = [];
   user: User = new User(-1, '', 'token', new Role(3, RoleEnum.ROLE_USER), 'nothing', []);
   isAuthenticated: boolean = false;
+
+  extractedToken!: string;
 
   constructor(
     private http: HttpClient,
@@ -55,9 +58,12 @@ export class UserService {
 
     this.http.post<any>(URL_SIGNIN, body, { observe: 'response' }).subscribe(
       (response) => {
-        const extractedToken = response.body.authToken;
-        this.user.token = extractedToken;
+         this.extractedToken = response.body.authToken;
+        this.user.token = this.extractedToken;
         this.isAuthenticated = true;
+        this.getUserFromUserName(this.user.userName, this.extractedToken);
+
+        //console.log('user récupéré :', this.user);
         this.redirect();
       },
       (error) => {
@@ -75,6 +81,17 @@ export class UserService {
     this.user = new User(-9999, '', '', role, '', []);
     this.isAuthenticated = false;
     this.router.navigate(['login']);
+  }
+
+  getUserFromUserName(userName: string, token: string): void {
+    const headers = { 'Authorization': 'Bearer ' + token };
+    let resp = this.http.get<User>(URL_GET_USER_BY_USERNAME + "/" + userName, { observe: 'response', headers: headers }).subscribe(
+      (response) => {
+        this.user = response.body as User;
+        this.user.token = token;
+        //console.log('user récupéré :', this.user);
+      }
+      );
   }
 
   redirect(): void {

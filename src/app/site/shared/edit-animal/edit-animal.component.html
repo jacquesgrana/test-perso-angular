@@ -19,7 +19,7 @@
   <mat-form-field class="" appearance="outline">
     <mat-label for="genre" class="">Genre</mat-label>
     <mat-select [(value)]="data.animal.genre" [compareWith]="compareGenres" class="" [disabled]="roleService.toString(userService.user.role) !== 'Administrateur'">
-      <mat-option *ngFor="let genre of genreList" [value]="genre" >{{genre}}</mat-option>
+      <mat-option *ngFor="let genre of genreList" [value]="genre" >{{genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-option>
     </mat-select>
   </mat-form-field>
 

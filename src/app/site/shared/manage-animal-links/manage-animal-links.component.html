@@ -21,7 +21,7 @@
       <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <ng-container *ngIf="roleService.toString(userService.user.role) == 'Administrateur'" matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <button mat-mini-fab color="warn" (click)="unlinkAnimal(element)" class="">
@@ -30,9 +30,9 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="roleService.toString(userService.user.role) == 'Administrateur' ? displayedAnimalsColumns : displayedAnimalsColumnsManager"></mat-header-row>
 
-    <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
+    <mat-row *matRowDef="let row; columns: roleService.toString(userService.user.role) == 'Administrateur' ? displayedAnimalsColumns : displayedAnimalsColumnsManager"></mat-row>
   </mat-table>
 
 
@@ -58,7 +58,7 @@
       <mat-cell *matCellDef="let element">{{element.genre == 'MALE' ? 'Mâle' : 'Femelle'}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <ng-container *ngIf="roleService.toString(userService.user.role) == 'Administrateur'" matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <button mat-mini-fab color="accent" (click)="linkAnimal(element)" class="">
@@ -67,9 +67,9 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedAnimalsColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="roleService.toString(userService.user.role) == 'Administrateur' ? displayedAnimalsColumns : displayedAnimalsColumnsManager"></mat-header-row>
 
-    <mat-row *matRowDef="let row; columns: displayedAnimalsColumns"></mat-row>
+    <mat-row *matRowDef="let row; columns: roleService.toString(userService.user.role) == 'Administrateur' ? displayedAnimalsColumns : displayedAnimalsColumnsManager"></mat-row>
   </mat-table>
 </div>
 

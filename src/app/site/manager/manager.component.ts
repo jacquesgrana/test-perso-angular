@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user-service.service';
 import { EditAnimalTypeComponent } from '../shared/edit-animal-type/edit-animal-type.component';
 import { EditAnimalComponent } from '../shared/edit-animal/edit-animal.component';
 import { EditUserComponent } from '../shared/edit-user/edit-user.component';
+import { ManageAnimalLinksComponent } from '../shared/manage-animal-links/manage-animal-links.component';
 
 @Component({
   selector: 'app-manager',
@@ -126,4 +127,16 @@ export class ManagerComponent implements OnInit {
     });
   }
 
+  manageAnimalsForUser(user: User) {
+    console.log('manage animals for user :', user.userName);
+    const dialogRefUser = this.dialogAnimalLinks.open(ManageAnimalLinksComponent, {
+      disableClose: true,
+      panelClass: ['dialog'],
+      data: { user: user }
+    });
+    dialogRefUser.afterClosed().subscribe(data => {
+      this.getUserList();
+    }
+    );
+  }
 }

@@ -23,7 +23,7 @@ export class GenServiceService<T extends { id?: number }> {
 
   constructor(
     protected http: HttpClient,
-    private userService: UserService
+    protected userService: UserService
     ) {
     //this.headers.set('Content-Type', 'application/json');
     //this.headers.set('Access-Control-Allow-Origin', '*'); // renvoie une erreur cors dans le navigateur
